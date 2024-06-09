@@ -1,6 +1,6 @@
 {
-  "name": "tp-template",
-  "version": "0.1.0",
+  "name": "psa-frontend",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.0.17",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/material": "^5.14.19",
     "@types/node": "18.16.1",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
     "autoprefixer": "10.4.14",
+    "axios": "^1.6.2",
+    "date-fns": "^2.30.0",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "next": "13.3.1",
@@ -21,8 +27,11 @@
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.48.2",
+    "react-select": "^5.8.0",
     "swr": "^2.1.5",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4"
   }
 }
+
