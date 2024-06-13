@@ -30,7 +30,7 @@ export default function Clientes() {
     <>
       <div className="container max-w-7xl mx-auto mt-8">
         <div className="mb-4">
-          <h1 className="text-3xl font-bold decoration-gray-400">Clientes</h1>
+          <h1 className="text-3xl font-bold decoration-gray-400 text-gray-900">Clientes</h1>
         </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">

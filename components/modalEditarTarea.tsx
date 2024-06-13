@@ -59,7 +59,7 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                     </button>
                 </div>
 
-                <h1 className='text-3xl font-bold decoration-gray-400'>Editar Tarea</h1>
+                <h1 className='text-3xl font-bold decoration-gray-400 text-white'>Editar Tarea</h1>
                 <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
 
                 <div>
@@ -88,17 +88,7 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                         id="message" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripción de la tarea..."></textarea>
                 </div><br />
 
-                {/* ACA EMPIEZA LA GRILLA 
-            <div className='input-group mb-3' >
-                <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white' id='inputGroup-sizing-defult'>Fecha de Inicio:</label>
-                <input 
-                onChange={(event)=>{setFechaIni(event.target.value)}}
-                type='date' className='datepicker bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'/>
-            </div><br/>
-            */}
-
-
-
+             
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Responsable de la Tarea:</label>

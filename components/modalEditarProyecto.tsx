@@ -6,12 +6,11 @@ import IsLeaderNull from './isLiderNull';
 const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children }: { isOpen: boolean; onClose: () => void; editarDatos: (datos: any) => void; proyecto: any; children: any }) => {
 
     const diccionarioEstado: any = {
-        "Nuevo": "NUEVO",
-        "En progreso": "EN_PROGRESO",
-        "Cerrado": "CERRADO",
-        "Bloqueado": "BLOQUEADO",
+        "Empezado": "EMPEZADO",
+        "En curso": "EN_CURSO",
+        "Terminado": "TERMINADO",
+        "Suspendido": "SUSPENDIDO",
     }
-
 
     const [recursos, setRecursos] = useState([])
     const [id, setId] = useState(proyecto['id'])

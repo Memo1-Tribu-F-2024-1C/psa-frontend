@@ -54,24 +54,24 @@ export default function TareaGridRow({ tarea, idProyecto }: { tarea: any; idProy
 
     return (
         <tr key={`${tarea['id']}`}>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div className="text-m flex items-center">{tarea['id']}</div>
+            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
+                <div className="text-m flex items-center text-gray-200">{tarea['id']}</div>
             </td>
 
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div className="text-m flex items-center">{tarea['nombre']}</div>
+            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
+                <div className="text-m flex items-center text-gray-200">{tarea['nombre']}</div>
             </td>
 
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div className="text-m leading-5 text-gray-900">{ColaboradorIsNull(tarea)}</div>
+            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
+                <div className="text-m leading-5 text-gray-200">{ColaboradorIsNull(tarea)}</div>
             </td>
 
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div className="text-m leading-5 text-gray-900">{tarea['estado']}</div>
+            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
+                <div className="text-m leading-5 text-gray-200">{tarea['estado']}</div>
             </td>
 
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                <div className="text-m leading-5 text-gray-900"> <FormatDate dateString={tarea['fechaCreacion']} /></div>
+            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
+                <div className="text-m leading-5 text-gray-200"> <FormatDate dateString={tarea['fechaCreacion']} /></div>
             </td>
 
 
@@ -99,10 +99,10 @@ export default function TareaGridRow({ tarea, idProyecto }: { tarea: any; idProy
                     Borrar
                 </button>
                 <ModalConfirmar isOpen={modalEliminar.isOpen} onClose={() => setModalEliminar({ isOpen: false, todo: {} })}>
-                    <div className='container'>
+                    <div className='container text-white'>
                         <h1 className='text-3xl font-bold decoration-gray-400'>Eliminar Tarea!</h1>
                         <h1 className='text-2xl font-bold decoration-gray-400'>Desea eliminar la tarea: <b className="text-blue-600">{tarea['nombre']}</b>?</h1><br />
-                        <p>Al <b>Confirmar</b> se borrará la tarea asociada al proyecto...</p><br />
+                        <p >Al <b>Confirmar</b> se borrará la tarea asociada al proyecto...</p><br />
                         <div className='flex flex-row-reverse gap-10'>
                             <button
                                 onClick={() => BorrarTarea(tarea)}

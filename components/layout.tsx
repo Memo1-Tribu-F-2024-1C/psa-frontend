@@ -8,6 +8,14 @@ export default function Layout({ children }: { children: any }) {
       title: "Inicio",
     },
     {
+      href: "/proyectos",
+      title: "Proyectos",
+    },
+    {
+      href: "/productos",
+      title: "Productos",
+    },
+    {
       href: "/clientes",
       title: "Clientes",
     },
@@ -15,23 +23,15 @@ export default function Layout({ children }: { children: any }) {
       href: "/usuarios",
       title: "Usuarios",
     },
-    {
-      href: "/productos",
-      title: "Productos",
-    },
-    {
-      href: "/proyectos",
-      title: "Proyectos",
-    },
   ]
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <header className="bg-black sticky top-0 h-14 flex justify-center items-center font-semibold uppercase text-white">
-        PSA - Sistema de gestion
+    <div className="min-h-screen flex flex-col bg-[#292F36]">
+      <header className=" md:w-60 bg-[#3C3F42] sticky py-10 top-0 h-14 flex justify-center  items-center font-semibold uppercase text-white border-r-[3px] dark:border-gray-400">
+        PSA - Sistema de gestion  
       </header>
       <div className="flex flex-col md:flex-row flex-1">
-        <aside className="bg-black w-full md:w-60">
+        <aside className="bg-[#3C3F42]  w-full md:w-60 border-r-[3px] dark:border-gray-400">
           <nav>
             <ul>
               {menuItems.map((item) => (
