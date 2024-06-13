@@ -5,20 +5,19 @@ import ProgressBar from "./progressBar";
 export default function MostrarProyecto( { proyecto,Tareas} : {proyecto: any; Tareas:any} ){
       
     const cantidadTareas = Tareas.length;
-    const iniciados = Tareas.filter((objeto : any) => objeto['estado'] === 'No iniciado').length;
-    const enProgreso = Tareas.filter((objeto : any) => objeto['estado'] === 'En proceso').length;
+    const iniciados = Tareas.filter((objeto : any) => objeto['estado'] === 'Nuevo').length;
+    const enProgreso = Tareas.filter((objeto : any) => objeto['estado'] === 'En curso').length;
     const bloqueado = Tareas.filter((objeto : any) => objeto['estado'] === 'Bloqueado').length;
-    const finalizado = Tareas.filter((objeto : any) => objeto['estado'] === 'Finalizado').length;
+    const finalizado = Tareas.filter((objeto : any) => objeto['estado'] === 'Cerrado').length;
     
     return (
         <div className={styles.cajaProyecto}>
             <div className={styles.caja1} >
-                <b>ID: </b>{proyecto['id']}<br/>
-                <b>Nombre: </b>{proyecto['nombre']}<br/>
-                <b>Descripción: </b>{proyecto['descripcion']}<br/>
-
-
-            </div>
+                <b>ID: </b> <b className="text-bold text-gray-600"> {proyecto['id']} </b> <br/>
+                <b>Nombre: </b><b className="text-bold text-gray-600"> {proyecto['nombre']} </b><br/>
+                <b>Descripción: </b><b className="text-bold text-gray-600"> {proyecto['descripcion']} </b><br/>
+                <b>Lider: </b> <b className="text-bold text-gray-600">{proyecto['lider'].nombre}</b> <b className="text-bold text-gray-600">{proyecto['lider'].apellido}</b> <br/>
+        </div>
 
             <div className={styles.caja2}>
                            

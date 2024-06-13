@@ -22,16 +22,7 @@ export default function Tareas({id}:{id:any}) {
     const [estadoSeleccionado, setEstadoSeleccionado] = useState('Todos');
     const [crearTareaModal, setCrearTareaModal] = useState(false);       
 
-   /* const guardarDatos = async (datos: any) => {
-        setDatos(datos);
-        await fetch("https://psa-backend-projectos.onrender.com/tarea", {
-            method:'POST',
-            body: JSON.stringify(datos),
-            headers: {'Content-type' : 'Application/json'}
-        } );
-        window.location.reload();
-    }
-*/
+ 
     const guardarDatos = (datos: any) => {
         proyectosAxios.post('/tarea', datos)
           .then(response => {
@@ -43,19 +34,7 @@ export default function Tareas({id}:{id:any}) {
           });
       }
     
-    //const {id} = router.query;
-
-   /* useEffect(() => {
-        fetch(`https://psa-backend-projectos.onrender.com/proyecto/${id}`)
-            .then((res) => {
-                console.log(res)
-                return res.json()
-            })
-            .then((data) => {
-                setProyecto(data)
-            })
-    }, [])
-      */
+  
 
     useEffect(() => {
         proyectosAxios.get(`/proyecto/${id}`)
@@ -68,18 +47,7 @@ export default function Tareas({id}:{id:any}) {
           });
       }, []);
     
-    /*
-    useEffect(() => {
-        fetch(`https://psa-backend-projectos.onrender.com/tareas`)
-            .then((res) => {
-                console.log(res)
-                return res.json()
-            })
-            .then((data) => {
-                setTareas(data)
-            })
-    }, []);
-    */
+   
 
     useEffect(() => {
         proyectosAxios.get(`/proyecto/${id}/tareas`)
@@ -102,13 +70,13 @@ export default function Tareas({id}:{id:any}) {
 
             <div className="container max-w-7xl mx-auto mt-8">
                 <div className="mb-4">
-                    <h1 className="text-3xl font-bold decoration-gray-400">Proyecto: {id} </h1>
-                    <h1 className="text-3xl font-bold decoration-gray-400">Listado de Tareas</h1>
+                    <h1 className="text-3xl font-bold text-black decoration-gray-400">Proyecto: {id} </h1>
+                    <h1 className="text-3xl font-bold text-black decoration-gray-400">Listado de Tareas</h1>
                     <br/>
                     <hr/>
                 </div>
 
-                <MostrarProyecto proyecto={proyecto}  Tareas={tareasProyecto}/>
+                /*<MostrarProyecto proyecto={proyecto}  Tareas={tareasProyecto}/>*/
 
 
                 <div className="mb-4">
@@ -126,17 +94,17 @@ export default function Tareas({id}:{id:any}) {
                 </div>
 
                 <div className='space-x-4 '>
-                   <label >Filtrar por estado: </label>
+                   <label className="text-l font-bold text-black decoration-gray-400" >Filtrar por estado: </label>
                     <select  className='text-gray-600 border border-gray-300 rounded outline-infigo-700 ' onChange={(e) => setEstadoSeleccionado(e.target.value)}>
                         <option value="Todos">Todos</option>
-                        <option value="No iniciado">No iniciado</option>
-                        <option value="En proceso">En proceso</option>
+                        <option value="Nuevo">Nuevo</option>
+                        <option value="En curso">En curso</option>
                         <option value="Bloqueado">Bloqueado</option>
-                        <option value="Finalizado">Finalizado</option>                
+                        <option value="Cerrado">Cerrado</option>                
                     </select>
                             
                     
-                    <label >Filtrar tarea por nombre de tarea: </label>
+                    <label className="text-l font-bold text-black decoration-gray-400" >Filtrar tarea por nombre de tarea: </label>
                     <input
                     onChange={(e)=>(setTextFilter(e.target.value) )}
                     type='text'
@@ -149,18 +117,18 @@ export default function Tareas({id}:{id:any}) {
                     <div className="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                         <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                             <table className="min-w-full">
-                                <thead>
-                                <tr>
+                                <thead >
+                                <tr >
                                     <HeaderItem title="ID" />
                                     <HeaderItem title="Nombre" />
-                                    <HeaderItem title="Tecnico" />
+                                    <HeaderItem title="Colaborador" />
                                     <HeaderItem title="Estado" />
                                     <HeaderItem title="Fecha de Inicio" />
                                     <HeaderItem title="Acciones" />
                                 </tr>
                                 </thead>
 
-                                <tbody>                                
+                                <tbody className="text-black">                                
                                 {tareasSelects.map((tarea) => (
                                     <TareaGridRow key={tarea['id']} tarea={tarea} idProyecto={id} />
                                 ))}    

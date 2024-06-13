@@ -5,10 +5,10 @@ import { proyectosAxios } from "@/api/axios";
 const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, children }: { isOpen: boolean; onClose: () => void; editarDatos: (datos: any, tarea: any) => void; tarea: any; idProyecto: any; children: any }) => {
 
     const diccionarioEstado: any = {
-        "Empezado": "EMPEZADO",
-        "En curso": "EN_CURSO",
-        "Terminado": "TERMINADO",
-        "Suspendido": "SUSPENDIDO",
+        "Nuevo": "NUEVO",
+        "En progreso": "EN_PROGRESO",
+        "Cerrado": "CERRADO",
+        "Bloqueado": "BLOQUEADO",
     }
 
     const [recursos, setRecursos] = useState([]);
@@ -120,9 +120,10 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                         <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
                             value={estado}
                             onChange={(event) => { setEstado(event.target.value) }}>
-                            <option value="EMPEZADO">EMPEZADO</option>
-                            <option value="EN_CURSO">EN CURSO</option>
-                            <option value="TERMINADO">TERMINADO</option>
+                            <option value="NUEVO">NUEVO</option>
+                            <option value="EN_PROGRESO">EN PROGRESO</option>
+                            <option value="BLOQUEADO">BLOQUEADO</option>
+                            <option value="CERRADO">CERRADO</option> 
                         </select>
                     </div>
                 </div><br />
