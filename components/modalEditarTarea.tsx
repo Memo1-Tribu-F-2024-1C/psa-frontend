@@ -122,7 +122,6 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                 <div className='flex flex-row-reverse gap-10'>
                     <button
                         onClick={() => {
-                            //                        editarDatos({Nombre: nombre, Descripcion: descripcion,FechaIni: fechaIni,Estado: estado, Tecnico: tecnico ,HorasCalculadas: horasCalculadas,Proyecto: idProyecto,Id: id});
                             editarDatos({ id: id, nombre: nombre, descripcion: descripcion, estado: estado, fechaCreacion: fechaIni, colaboradorId: tecnico, proyectoId: idProyecto }, tarea = id);
                             onClose()
                         }}

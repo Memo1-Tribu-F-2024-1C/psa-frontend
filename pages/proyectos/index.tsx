@@ -63,7 +63,7 @@ export default function Proyectos() {
 
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 ">
-            <div className="inline-block min-w-full overflow-hidden align-middle border-b border-r border-l border-t border-solid border-gray-200  sm:rounded-lg">
+            <div className="inline-block min-w-full overflow-hidden align-middle border-b border-r border-l border-t border-solid border-gray-200 sm:rounded-lg">
               <table className="min-w-full ">
                 <thead>
                   <tr className="text-center ">

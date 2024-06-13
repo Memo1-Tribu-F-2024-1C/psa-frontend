@@ -13,27 +13,27 @@ export default function MostrarProyecto({ proyecto, Tareas }: { proyecto: any; T
         <div className={styles.cajaProyecto}>
             <div className={styles.caja1} >
                 <div className="task-row my-1">
-                    <b>ID: </b> <b className=" text-gray-200"> {proyecto['id']} </b> <br />
+                    <b>ID: </b> <b className=" text-gray-300"> {proyecto['id']} </b> <br />
                 </div>
                 <div className="task-row my-1">
-                    <b>Nombre: </b><b className=" text-gray-200"> {proyecto['nombre']} </b><br />
+                    <b>Nombre: </b><b className=" text-gray-300"> {proyecto['nombre']} </b><br />
                 </div>
                 <div className="task-row my-1">
-                    <b>Descripción: </b><b className=" text-gray-200"> {proyecto['descripcion']} </b><br />
+                    <b>Descripción: </b><b className=" text-gray-300"> {proyecto['descripcion']} </b><br />
                 </div>
                 <div className="task-row my-1">
                     <b>Lider: </b>
                     {proyecto['lider'] ? (
-                        <b className=" text-gray-200">{proyecto['lider'].nombre} {proyecto['lider'].apellido}</b>
+                        <b className=" text-gray-300">{proyecto['lider'].nombre} {proyecto['lider'].apellido}</b>
                     ) :
 
                         (
-                            <span className="text-gray-200">No asignado</span>
+                            <span className="text-gray-300">No asignado</span>
                         )}
                     <br />
                 </div>
                 <div className="task-row my-1">
-                    <b>Estado proyecto: </b><b className=" text-gray-200"> {proyecto['estado']} </b><br />
+                    <b>Estado proyecto: </b><b className=" text-gray-300"> {proyecto['estado']} </b><br />
                 </div>
             </div>
 
