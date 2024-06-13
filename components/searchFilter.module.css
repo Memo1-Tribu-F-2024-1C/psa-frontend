@@ -1,0 +1,13 @@
+.inputContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-self: flex-start;
+    align-items: center;
+    width: 300px;
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 5px #ccc;
+}

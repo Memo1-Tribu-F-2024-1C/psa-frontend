@@ -9,7 +9,7 @@
 }
 
 .modalBody {
-  background-color: white;
+  background-color: #333;
   width: 60%;
   min-width: 400px;
   border-radius: 1rem;
@@ -28,3 +28,4 @@
   color: red;
   font-size: 0.8rem;
 }
+

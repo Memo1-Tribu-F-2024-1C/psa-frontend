@@ -1,0 +1,25 @@
+.caja1{
+    width: 50%;
+    background-color: rgb(233, 238, 238);
+    border-radius: 10px;
+    padding-left: 20px;
+    padding: 10PX;
+    margin-right: 10px;
+
+  }
+  
+  .caja2{
+    width: 50%;
+    background-color: rgb(233, 238, 238);
+    border-radius: 10px;
+    padding-left: 20px;
+    padding: 10px;
+    margin-left:5px;
+  }
+  
+  .cajaProyecto{
+    display: flex;
+    height: 250px;
+    width: 100%;
+    padding-bottom: 20px;
+  }

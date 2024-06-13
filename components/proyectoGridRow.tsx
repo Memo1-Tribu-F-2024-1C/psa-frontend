@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Proyecto } from "@/types/types";
 import { useRouter } from 'next/router';
+import { proyectosAxios } from "@/api/axios";
 import FormatDate from "@/components/formatDate";
 import IsLeaderNull from "@/components/isLiderNull";
+import ModalEditarProyecto from "@/components/modalEditarProyecto";
+import ModalConfirmar from "@/components/modalConfirmar";
 
 export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
 
@@ -16,22 +19,38 @@ export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
   const [editarProyectoModal, setEditarProyectoModal] = useState(false);
   const [datos, setDatos] = useState({});
 
-  const BorrarProyecto = async (proyecto: any) => {
+  /*const BorrarProyecto = async (proyecto: any) => {
     console.log(proyecto.id)
     await fetch(`https://psa-backend-projectos.onrender.com/proyecto/${proyecto.id}`, { method: 'DELETE' });
     setModalEliminar({ isOpen: false, todo: {} });
     window.location.reload();
   }
+    */
 
-  const editarDatos = async (data: any) => {
-    setDatos(data);
-    await fetch(`https://psa-backend-projectos.onrender.com/proyecto`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      headers: { 'Content-type': 'Application/json' }
+  const BorrarProyecto = async (proyecto: any) => {
+    console.log(proyecto.id);
+    proyectosAxios.delete(`proyecto/${proyecto.id}`)
+      .then(response => {
+        console.log('Response:', response); 
+        setModalEliminar({ isOpen: false, todo: {} });
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error('Error:', error); 
+      });
+  };
+
+const editarDatos = (datos: any) => {
+  proyectosAxios.put('/proyecto', datos)
+    .then(response => {
+      setDatos(response.data);
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error(error);
     });
-    window.location.reload();
-  }
+}
+
 
   return (
     <tr key={`${proyecto['id']}`}>
@@ -47,9 +66,6 @@ export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
         <div className="text-sm leading-5 text-gray-900"><IsLeaderNull lider={proyecto['lider']} /></div>
       </td>
 
-      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <div className="text-sm leading-5 text-gray-900">{proyecto['estado']}</div>
-      </td>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <div className="text-sm leading-5 text-gray-900"><FormatDate dateString={proyecto['fechaCreacion']} /></div>
@@ -59,6 +75,9 @@ export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
         <div className="text-sm leading-5 text-gray-900"><FormatDate dateString={proyecto['fechaFinalizacion']} /></div>
       </td>
 
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+        <div className="text-sm leading-5 text-gray-900">{proyecto['estado']}</div>
+      </td>
 
       {/* Botones de Acciones */}
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -71,9 +90,9 @@ export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
           </svg>
           Editar
         </button>
-        {/* <ModalEditarProyecto isOpen={editarProyectoModal} onClose={() => setEditarProyectoModal(false)} editarDatos={editarDatos} proyecto={proyecto}>
+        { <ModalEditarProyecto isOpen={editarProyectoModal} onClose={() => setEditarProyectoModal(false)} editarDatos={editarDatos} proyecto={proyecto}>
           <button onClick={() => setEditarProyectoModal(false)}>Guardar</button>
-        </ModalEditarProyecto> */}
+        </ModalEditarProyecto> }
 
         <button
           onClick={() => setModalEliminar({ isOpen: true, todo: {} })}
@@ -84,7 +103,7 @@ export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
           Borrar
         </button>
 
-        {/* <ModalConfirmar isOpen={modalEliminar.isOpen} onClose={() => setModalEliminar({ isOpen: false, todo: {} })}>
+        {<ModalConfirmar isOpen={modalEliminar.isOpen} onClose={() => setModalEliminar({ isOpen: false, todo: {} })}>
           <div className='container'>
             <h1 className='text-3xl font-bold decoration-gray-400'>Eliminar Proyecto !</h1>
             <h1 className='text-2xl font-bold decoration-gray-400'>Desea eliminar el proyecto: <b className="text-blue-600">{proyecto['nombre']}</b>?</h1><br />
@@ -108,7 +127,7 @@ export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
               </button>
             </div>
           </div>
-        </ModalConfirmar> */}
+        </ModalConfirmar> }
 
         <button
           onClick={() => router.push({ pathname: `./proyectos/tareas/${proyecto['id']}` })}

@@ -11,12 +11,20 @@ export default function Clientes() {
   useEffect(() => {
     fetch("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes")
       .then((res) => {
-        return res.json()
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
       })
       .then((data) => {
-        setList(data)
+        console.log(data);
+        // Maneja los datos de la respuesta aquí
       })
-  }, [])
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+  
 
   return (
     <>

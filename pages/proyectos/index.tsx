@@ -66,12 +66,12 @@ export default function Proyectos() {
             <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
               <table className="min-w-full">
                 <thead>
-                  <tr>
+                  <tr className="text-center">
                     <HeaderItem title="ID"  />
                     <HeaderItem title="Nombre"  />
-                    <HeaderItem title="Lider" />
+                    <HeaderItem title="Líder" />
                     <HeaderItem title="Fecha de inicio" />
-                    <HeaderItem title="Fecha de finalización" />
+                    <HeaderItem title="Fecha de finalización estimada" />
                     <HeaderItem title="Estado" />
                     <HeaderItem title="Acciones" />
                   </tr>

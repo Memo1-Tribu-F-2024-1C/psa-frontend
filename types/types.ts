@@ -14,14 +14,32 @@ export interface Proyecto {
   id: number;
   nombre: string;
   lider: string;
-  estado: EstadoTarea;
+  estado: EstadoProyecto;
   fechaCreacion: string;
   fechaFinalizacion: string;
 }
 
+
+export interface Tarea {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  estado: EstadoTarea;
+  fechaCreacion: string;
+  colaborador: any;
+  proyecto: any;
+}
+
 export enum EstadoTarea {
-  NO_INICIADO = 'No iniciado',
-  EN_PROCESO = 'En proceso',
-  FINALIZADO = 'Finalizado',
+  NUEVO = 'Nuevo',
+  EN_PROGRESO = 'En progreso',
+  CERRADO = 'Cerrado',
   BLOQUEADO = 'Bloqueado',
+}
+
+export enum EstadoProyecto {
+  EMPEZADO = 'Empezado',
+  EN_CURSO = 'En curso',
+  TERMINADO = 'Terminado',
+  SUSPENDIDO = 'Suspendido',
 }
