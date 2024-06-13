@@ -96,6 +96,7 @@ const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children 
                             <option value="EMPEZADO">EMPEZADO</option>
                             <option value="EN_CURSO">EN CURSO</option>
                             <option value="TERMINADO">TERMINADO</option>
+                            <option value="SUSPENDIDO">SUSPENDIDO</option>
                         </select>
                     </div>
                 </div><br />
