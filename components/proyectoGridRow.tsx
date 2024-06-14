@@ -48,7 +48,7 @@ const editarDatos = (datos: any) => {
   return (
     <tr key={`${proyecto['id']}`}>
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <div className="text-m flex items-center text-gray-200">{proyecto['id']}</div>
+        <div className="text-m flex items-center text-gray-200">{proyecto['id'] + 3672}</div>
       </td>
 
       <td className="px-2 py-2 whitespace-no-wrap border-b border-gray-200">
@@ -89,7 +89,7 @@ const editarDatos = (datos: any) => {
 
         <button
           onClick={() => router.push({ pathname: `./proyectos/tareas/${proyecto['id']}` })}
-          className="inline-flex items-center mr-2 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white text-sm font-medium rounded-md">
+          className="inline-flex items-center mr-2 mt-1 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white text-sm font-medium rounded-md">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
@@ -107,9 +107,10 @@ const editarDatos = (datos: any) => {
 
         {<ModalConfirmar isOpen={modalEliminar.isOpen} onClose={() => setModalEliminar({ isOpen: false, todo: {} })}>
           <div className='container'>
-            <h1 className='text-3xl font-bold decoration-gray-400'>Eliminar Proyecto !</h1>
-            <h1 className='text-2xl font-bold decoration-gray-400'>Desea eliminar el proyecto: <b className="text-blue-600">{proyecto['nombre']}</b>?</h1><br />
-            <p>Al <b>Confirmar</b> se borrará el proyecto y todas sus tareas asociadas...</p><br />
+            <h1 className='text-3xl font-bold decoration-gray-400'>¡Borrar Proyecto!</h1>
+            <h1 className='text-2xl font-bold decoration-gray-400'>Desea borrar el proyecto: <b className="text-blue-600">{proyecto['nombre']}</b>?</h1>
+            <h1 className='text-2xl font-bold decoration-gray-400'>ID: <b className="text-blue-600">{proyecto['id']+3672}</b></h1><br />
+            <p><b>Atención</b> se borrará el proyecto y sus tareas asociadas</p><br />
             <div className='flex flex-row-reverse gap-10'>
               <button
                 onClick={() => BorrarProyecto(proyecto)}

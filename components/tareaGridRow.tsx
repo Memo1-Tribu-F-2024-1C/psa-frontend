@@ -71,8 +71,13 @@ export default function TareaGridRow({ tarea, idProyecto }: { tarea: any; idProy
             </td>
 
             <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
+                <div className="text-m leading-5 text-gray-200">{tarea['prioridad']}</div>
+            </td>
+
+            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
                 <div className="text-m leading-5 text-gray-200"> <FormatDate dateString={tarea['fechaCreacion']} /></div>
             </td>
+            
 
 
             {/* Botones de Acciones */}
@@ -100,9 +105,10 @@ export default function TareaGridRow({ tarea, idProyecto }: { tarea: any; idProy
                 </button>
                 <ModalConfirmar isOpen={modalEliminar.isOpen} onClose={() => setModalEliminar({ isOpen: false, todo: {} })}>
                     <div className='container text-white'>
-                        <h1 className='text-3xl font-bold decoration-gray-400'>Eliminar Tarea!</h1>
-                        <h1 className='text-2xl font-bold decoration-gray-400'>Desea eliminar la tarea: <b className="text-blue-600">{tarea['nombre']}</b>?</h1><br />
-                        <p >Al <b>Confirmar</b> se borrará la tarea asociada al proyecto...</p><br />
+                        <h1 className='text-3xl font-bold decoration-gray-400'>¡Borrar Tarea!</h1>
+                        <h1 className='text-2xl font-bold decoration-gray-400'>Desea borrar la tarea: <b className="text-blue-600">{tarea['nombre']}</b>?</h1>
+                        <h1 className='text-2xl font-bold decoration-gray-400'>ID: <b className="text-blue-600">{tarea['id']}</b></h1><br />
+                        <p><b>Atención</b> se borrará la tarea</p><br />
                         <div className='flex flex-row-reverse gap-10'>
                             <button
                                 onClick={() => BorrarTarea(tarea)}

@@ -13,7 +13,7 @@ export default function MostrarProyecto({ proyecto, Tareas }: { proyecto: any; T
         <div className={styles.cajaProyecto}>
             <div className={styles.caja1} >
                 <div className="task-row my-1">
-                    <b>ID: </b> <b className=" text-gray-300"> {proyecto['id']} </b> <br />
+                    <b>ID: </b> <b className=" text-gray-300"> {proyecto['id']+3672} </b> <br />
                 </div>
                 <div className="task-row my-1">
                     <b>Nombre: </b><b className=" text-gray-300"> {proyecto['nombre']} </b><br />

@@ -25,6 +25,7 @@ export interface Tarea {
   nombre: string;
   descripcion: string;
   estado: EstadoTarea;
+  prioridad: PrioridadTarea;
   fechaCreacion: string;
   colaborador: any;
   proyecto: any;
@@ -42,4 +43,10 @@ export enum EstadoProyecto {
   EN_CURSO = 'En curso',
   TERMINADO = 'Terminado',
   SUSPENDIDO = 'Suspendido',
+}
+
+export enum PrioridadTarea {
+  ALTA = 'Alta',
+  MEDIA= 'Media',
+  BAJA = 'Baja',
 }

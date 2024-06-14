@@ -11,29 +11,26 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
         "Bloqueado": "BLOQUEADO",
     }
 
+    const diccionarioPrioridad: any = {
+        "Alta": "ALTA",
+        "Media": "MEDIA",
+        "Baja": "BAJA",
+    }
+
     const [recursos, setRecursos] = useState([]);
     const [id, setId] = useState(tarea['id']);
     const [nombre, setNombre] = useState(tarea['nombre']);
     const [descripcion, setDescripcion] = useState(tarea['descripcion']);
     const [fechaIni, setFechaIni] = useState(tarea['fechaCreacion']);
     const [estado, setEstado] = useState(diccionarioEstado[tarea['estado']]);
+    const [prioridad, setPrioridad] = useState(diccionarioPrioridad [tarea['prioridad']]);
     const [tecnico, setTecnico] = useState(tarea['colaborador'] === null ? null : tarea['colaborador']['id']);
     //const [horasCalculadas, setHorasCalculadas] = useState(tarea['horasCalculadas']);
 
 
     // Consulto los recursos disponibles para asignar a las tareas
-    /* useEffect ( () => {
-         fetch("https://psa-backend-projectos.onrender.com/recursos")
-             .then((res) => {
-                 return res.json()
-             })
-             .then((data) => {
-                 setRecursos(data)
-             })
-     }, [])
-     */
     useEffect(() => {
-        proyectosAxios.get('/recursos')
+        proyectosAxios.get('/colaboradores')
             .then(response => {
                 setRecursos(response.data);
             })
@@ -99,7 +96,7 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                             <option value={tarea['colaborador'] == null ? null : tarea['colaborador']['id']}>...</option>
                             {
                                 recursos.map((recurso) => (
-                                    <option key={recurso['legajo']} value={recurso['legajo']}>{recurso['Nombre']} {recurso['Apellido']}</option>
+                                    <option key={recurso['id']} value={recurso['id']}>{recurso['nombre']} {recurso['apellido']}</option>
                                 ))
                             }
                         </select>
@@ -116,13 +113,26 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                             <option value="CERRADO">CERRADO</option> 
                         </select>
                     </div>
+
+
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prioridad:</label>
+                        <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
+                            value={prioridad}
+                            onChange={(event) => {setPrioridad(event.target.value) }}>
+                            <option value="ALTA">ALTA</option>
+                            <option value="MEDIA">MEDIA</option>
+                            <option value="BAJA">BAJA</option>
+                        </select>
+                    </div>
+
                 </div><br />
 
 
                 <div className='flex flex-row-reverse gap-10'>
                     <button
                         onClick={() => {
-                            editarDatos({ id: id, nombre: nombre, descripcion: descripcion, estado: estado, fechaCreacion: fechaIni, colaboradorId: tecnico, proyectoId: idProyecto }, tarea = id);
+                            editarDatos({ id: id, nombre: nombre, descripcion: descripcion, estado: estado, prioridad: prioridad, fechaCreacion: fechaIni, colaboradorId: tecnico, proyectoId: idProyecto }, tarea = id);
                             onClose()
                         }}
                         className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md">
