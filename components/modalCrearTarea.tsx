@@ -8,15 +8,10 @@ const ModalCrearTarea = ({ isOpen, onClose, guardarDatos, idProyecto, children }
 
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");
-    const [fechaIni, setFechaIni] = useState("");
     const [estado, setEstado] = useState("NUEVO");
     const [prioridad, setPrioridad] = useState("ALTA");
     const [tecnico, setTecnico] = useState('');
-    const [horasCalculadas, setHorasCalculadas] = useState('');
-
-    // hay que poner el numero de proyecto desde el que creo la tarea.
-    const [proyecto, setProyecto] = useState('');
-
+    
     useEffect(() => {
         proyectosAxios.get('/colaboradores')
             .then(response => {
