@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import TareaGridRow from "@/components/tareaGridRow";
 import MostrarProyecto from "@/components/mostrarProyecto";
-import { Proyecto } from "@/types/types";
 import { useRouter } from 'next/router';
 import ModalCrearTarea from "@/components/modalCrearTarea";
-import { Cantora_One } from "next/font/google";
 import { proyectosAxios } from "@/api/axios";
 
 function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: boolean, isJustify?: boolean }) {
