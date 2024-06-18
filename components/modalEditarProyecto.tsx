@@ -21,7 +21,6 @@ const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children 
     const [fechaIni, setFechaIni] = useState(proyecto['fechaCreacion']);
     const [fechaFin, setFechaFin] = useState(proyecto['fechaFinalizacion']);
 
-    // Consulto los recursos disponibles para asignar a las tareas
     useEffect(() => {
         proyectosAxios.get('/recursos')
             .then(response => {
@@ -30,7 +29,7 @@ const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children 
             .catch(error => {
                 console.error(error);
             });
-        }, []);
+    }, []);
 
     return (
 
@@ -133,10 +132,7 @@ const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children 
                         Cancelar
                     </button>
                 </div>
-
             </div>
-
-
         </div>
     );
 }

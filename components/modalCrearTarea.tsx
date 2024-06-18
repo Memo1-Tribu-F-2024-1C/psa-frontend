@@ -11,7 +11,7 @@ const ModalCrearTarea = ({ isOpen, onClose, guardarDatos, idProyecto, children }
     const [estado, setEstado] = useState("NUEVO");
     const [prioridad, setPrioridad] = useState("ALTA");
     const [tecnico, setTecnico] = useState('');
-    
+
     useEffect(() => {
         proyectosAxios.get('/colaboradores')
             .then(response => {
@@ -118,10 +118,7 @@ const ModalCrearTarea = ({ isOpen, onClose, guardarDatos, idProyecto, children }
                         Cancelar
                     </button>
                 </div>
-
             </div>
-
-
         </div>
     );
 }
