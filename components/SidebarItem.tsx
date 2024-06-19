@@ -18,9 +18,8 @@ const SideBarItem = ({ href, title, children }: ISidebarItem) => {
           onClick={() => setOpen(!open)}
         >
           <span
-            className={`flex-1 ml-2 text-left whitespace-nowrap ${
-              router.asPath === href && "text-red-50"
-            }`}
+            className={`flex-1 ml-2 text-left whitespace-nowrap ${router.asPath === href && "text-red-50"
+              }`}
             sidebar-toggle-item="true"
           >
             {title}
@@ -64,9 +63,8 @@ const SideBarItem = ({ href, title, children }: ISidebarItem) => {
           className={`flex items-center w-full p-2 transition duration-75 rounded-lg group hover:bg-gray-700 text-white`}
         >
           <span
-            className={`flex-1 ml-2 text-left whitespace-nowrap ${
-              router.asPath === href && "font-bold"
-            }`}
+            className={`flex-1 ml-2 text-left whitespace-nowrap ${router.asPath === href && "font-bold"
+              }`}
           >
             {title}
           </span>

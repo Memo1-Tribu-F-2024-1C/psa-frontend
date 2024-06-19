@@ -51,8 +51,8 @@ export default function Modal({ modalOpen, setModalOpen, list }: ModalProps) {
                 >
                   <option selected>Seleccione usuario</option>
                   {list.map((usuario) => (
-                    <option value={`${usuario.nombre}-${usuario.apellido}`} key={`${usuario.nombre}-${usuario.apellido}`}>
-                      {usuario.nombre} {usuario.apellido}
+                    <option value={`${usuario.Nombre}-${usuario.Apellido}`} key={`${usuario.Nombre}-${usuario.Apellido}`}>
+                      {usuario.Nombre} {usuario.Apellido}
                     </option>
                   ))}
                 </select>
