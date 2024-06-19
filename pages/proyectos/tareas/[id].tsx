@@ -77,11 +77,13 @@ export default function Tareas({ id }: { id: any }) {
     .filter((tarea: any) => estadoSeleccionado === 'Todos' || tarea.estado === estadoSeleccionado)
     .filter((tarea: any) => prioridadSeleccionada === 'Todas' || tarea.prioridad === prioridadSeleccionada);
 
+  console.log(tareasFiltradas);
   return (
     <>
       <div className="container max-w-7xl mx-auto mt-8">
         <div className="mb-4">
-          <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Proyecto: {id} </h1>
+          {/* @ts-ignore */}
+          <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Proyecto: {proyecto.nombre} </h1>
           <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Listado de Tareas</h1>
           <br />
           <hr />

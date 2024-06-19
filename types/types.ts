@@ -36,6 +36,20 @@ export interface Tarea {
   proyecto: any;
 }
 
+export interface Ticket {
+  numeroTicket: number;
+  tiulo: string;
+  descripcion: string
+  severidad: string;
+  estado: string;
+  fechaLimite: string;
+  fechaCreacion: string;
+  cuitCliente: number;
+  codigoVersion: number,
+  codigoProducto: number,
+  idTareas: Array<number>;
+}
+
 export enum EstadoTarea {
   NUEVO = 'Nuevo',
   EN_PROGRESO = 'En progreso',
@@ -52,6 +66,6 @@ export enum EstadoProyecto {
 
 export enum PrioridadTarea {
   ALTA = 'Alta',
-  MEDIA= 'Media',
+  MEDIA = 'Media',
   BAJA = 'Baja',
 }

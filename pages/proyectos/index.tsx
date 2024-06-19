@@ -39,6 +39,8 @@ export default function Proyectos() {
       .catch(error => {
         console.error(error);
       });
+
+    proyectos.sort((a, b) => a['id'] - b['id'])
   }
 
   const obtenerRecursos = () => {
@@ -50,6 +52,7 @@ export default function Proyectos() {
         console.error(error);
       });
   }
+
 
   useEffect(() => {
     obtenerProyectos();
