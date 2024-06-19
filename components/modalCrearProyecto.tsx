@@ -1,28 +1,14 @@
-import { useEffect, useState } from 'react';
-import { proyectosAxios } from "@/api/axios";
+import { useState } from 'react';
+import { Usuario } from "@/types/types";
 import styles from './modalCrearProyecto.module.css';
 
-const ModalCrearProyecto = ({ isOpen, onClose, guardarDatos, children }: { isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; children: any }) => {
-
-  const [recursos, setRecursos] = useState([])
+const ModalCrearProyecto = ({ recursos, isOpen, onClose, guardarDatos, children }: { recursos: Array<Usuario>, isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; children: any }) => {
 
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [lider, setLider] = useState('');
   const [estado, setEstado] = useState("EMPEZADO");
   const [fechaFin, setFechaFin] = useState("");
-
-  
-  useEffect(() => {
-    proyectosAxios.get('/recursos')
-      .then(response => {
-        setRecursos(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      }); ``
-  }, []);
-
 
   return (
 
@@ -65,7 +51,7 @@ const ModalCrearProyecto = ({ isOpen, onClose, guardarDatos, children }: { isOpe
               <option value={lider}>...</option>
               {
                 recursos.map((recurso) => (
-                  <option key={recurso['legajo']} value={recurso['legajo']}>{recurso['Nombre']} {recurso['Apellido']}</option>
+                  <option key={recurso.legajo} value={recurso.legajo}>{recurso.Nombre} {recurso.Apellido}</option>
                 ))
               }
             </select>

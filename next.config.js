@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     SOPORTE_BASE_URL: "",
-    PROYECTO_BASE_URL: "http://localhost:8080",
+    PROYECTO_BASE_URL: "https://psa-backend-proyecto.onrender.com",
   },
 }
 

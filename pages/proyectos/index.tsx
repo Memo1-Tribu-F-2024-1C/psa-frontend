@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ModalCrearProyecto from "@/components/modalCrearProyecto";
 import ProyectoGridRow from "@/components/proyectoGridRow";
 
-function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: boolean, isJustify?: boolean}) {
+function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: boolean, isJustify?: boolean }) {
   return (
     <th className={`px-6 py-3 text-sm text-left ${isBold ? 'text-black' : 'text-gray-200 uppercase'} ${isJustify ? 'text-center' : ''}  border-b border-gray-200`}>
       {title}
@@ -16,6 +16,7 @@ export default function Proyectos() {
 
   const [proyectos, setProyectos] = useState<Proyecto[]>([]);
   const [crearProyectoModal, setCrearProyectoModal] = useState(false);
+  const [recursos, setRecursos] = useState([]);
   const [datos, setDatos] = useState({});
 
   const guardarDatos = (datos: any) => {
@@ -29,7 +30,7 @@ export default function Proyectos() {
       });
   }
 
-  useEffect(() => {
+  const obtenerProyectos = () => {
     proyectosAxios.get('/proyectos')
       .then(response => {
         console.log(response.data)
@@ -38,6 +39,21 @@ export default function Proyectos() {
       .catch(error => {
         console.error(error);
       });
+  }
+
+  const obtenerRecursos = () => {
+    proyectosAxios.get('/recursos')
+      .then(response => {
+        setRecursos(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  useEffect(() => {
+    obtenerProyectos();
+    obtenerRecursos();
   }, []);
 
   return (
@@ -56,7 +72,7 @@ export default function Proyectos() {
             </svg>
             Crear Proyecto
           </button>
-          <ModalCrearProyecto isOpen={crearProyectoModal} onClose={() => setCrearProyectoModal(false)} guardarDatos={guardarDatos}>
+          <ModalCrearProyecto recursos={recursos} isOpen={crearProyectoModal} onClose={() => setCrearProyectoModal(false)} guardarDatos={guardarDatos}>
             <button onClick={() => setCrearProyectoModal(false)}>Guardar</button>
           </ModalCrearProyecto>
         </div>
@@ -67,19 +83,19 @@ export default function Proyectos() {
               <table className="min-w-full ">
                 <thead>
                   <tr className="text-center ">
-                    <HeaderItem title="ID"  />
-                    <HeaderItem title="Nombre"  />
+                    <HeaderItem title="ID" />
+                    <HeaderItem title="Nombre" />
                     <HeaderItem title="Líder" />
                     <HeaderItem title="Fecha de inicio" />
                     <HeaderItem title="Fecha de fin estimada" />
                     <HeaderItem title="Estado" />
-                    <HeaderItem title="Acciones" isJustify = {true} />
+                    <HeaderItem title="Acciones" isJustify={true} />
                   </tr>
                 </thead>
 
                 <tbody>
                   {proyectos.map((proyecto) => (
-                    <ProyectoGridRow key={proyecto['id']} proyecto={proyecto} />
+                    <ProyectoGridRow key={proyecto['id']} proyecto={proyecto} recursos={recursos} />
                   ))}
                 </tbody>
               </table>

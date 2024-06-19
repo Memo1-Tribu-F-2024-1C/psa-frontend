@@ -1,7 +1,13 @@
 export interface Usuario {
-  nombre: string
-  apellido: string
+  Nombre: string
+  Apellido: string
   legajo: number
+}
+
+export interface Colaborador {
+  id: number
+  nombre: string;
+  apellido: string
 }
 
 export interface Cliente {
@@ -18,7 +24,6 @@ export interface Proyecto {
   fechaCreacion: string;
   fechaFinalizacion: string;
 }
-
 
 export interface Tarea {
   id: number;

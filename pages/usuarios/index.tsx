@@ -20,7 +20,6 @@ export default function Usuarios() {
       });
   }, []);
 
-
   return (
     <>
       <div className="container max-w-7xl mx-auto mt-8">

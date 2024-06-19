@@ -24,7 +24,6 @@ export default function Clientes() {
         console.error('Error fetching data:', error);
       });
   }, []);
-  
 
   return (
     <>

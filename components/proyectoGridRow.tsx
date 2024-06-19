@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Proyecto } from "@/types/types";
+import { Proyecto, Usuario } from "@/types/types";
 import { useRouter } from 'next/router';
 import { proyectosAxios } from "@/api/axios";
 import FormatDate from "@/components/formatDate";
@@ -7,7 +7,7 @@ import IsLeaderNull from "@/components/isLiderNull";
 import ModalEditarProyecto from "@/components/modalEditarProyecto";
 import ModalConfirmar from "@/components/modalConfirmar";
 
-export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
+export default function ProyectoGridRow({ proyecto, recursos }: { proyecto: Proyecto, recursos: Array<Usuario> }) {
 
   const router = useRouter();
 
@@ -19,31 +19,29 @@ export default function ProyectoGridRow({ proyecto }: { proyecto: Proyecto }) {
   const [editarProyectoModal, setEditarProyectoModal] = useState(false);
   const [datos, setDatos] = useState({});
 
-
   const BorrarProyecto = async (proyecto: any) => {
     console.log(proyecto.id);
     proyectosAxios.delete(`proyecto/${proyecto.id}`)
       .then(response => {
-        console.log('Response:', response); 
+        console.log('Response:', response);
         setModalEliminar({ isOpen: false, todo: {} });
         window.location.reload();
       })
       .catch(error => {
-        console.error('Error:', error); 
+        console.error('Error:', error);
       });
   };
 
-const editarDatos = (datos: any) => {
-  proyectosAxios.put('/proyecto', datos)
-    .then(response => {
-      setDatos(response.data);
-      window.location.reload();
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}
-
+  const editarDatos = (datos: any) => {
+    proyectosAxios.put('/proyecto', datos)
+      .then(response => {
+        setDatos(response.data);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
   return (
     <tr key={`${proyecto['id']}`}>
@@ -58,7 +56,6 @@ const editarDatos = (datos: any) => {
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <div className="text-m leading-5 text-gray-200"><IsLeaderNull lider={proyecto['lider']} /></div>
       </td>
-
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <div className="text-m leading-5 text-gray-200"><FormatDate dateString={proyecto['fechaCreacion']} /></div>
@@ -83,9 +80,9 @@ const editarDatos = (datos: any) => {
           </svg>
           Editar
         </button>
-        { <ModalEditarProyecto isOpen={editarProyectoModal} onClose={() => setEditarProyectoModal(false)} editarDatos={editarDatos} proyecto={proyecto}>
+        {<ModalEditarProyecto recursos={recursos} isOpen={editarProyectoModal} onClose={() => setEditarProyectoModal(false)} editarDatos={editarDatos} proyecto={proyecto}>
           <button onClick={() => setEditarProyectoModal(false)}>Guardar</button>
-        </ModalEditarProyecto> }
+        </ModalEditarProyecto>}
 
         <button
           onClick={() => router.push({ pathname: `./proyectos/tareas/${proyecto['id']}` })}
@@ -109,7 +106,7 @@ const editarDatos = (datos: any) => {
           <div className='container'>
             <h1 className='text-3xl font-bold decoration-gray-400'>¡Borrar Proyecto!</h1>
             <h1 className='text-2xl font-bold decoration-gray-400'>Desea borrar el proyecto: <b className="text-blue-600">{proyecto['nombre']}</b>?</h1>
-            <h1 className='text-2xl font-bold decoration-gray-400'>ID: <b className="text-blue-600">{proyecto['id']+3672}</b></h1><br />
+            <h1 className='text-2xl font-bold decoration-gray-400'>ID: <b className="text-blue-600">{proyecto['id'] + 3672}</b></h1><br />
             <p><b>Atención</b> se borrará el proyecto y sus tareas asociadas</p><br />
             <div className='flex flex-row-reverse gap-10'>
               <button
@@ -130,9 +127,9 @@ const editarDatos = (datos: any) => {
               </button>
             </div>
           </div>
-        </ModalConfirmar> }
+        </ModalConfirmar>}
 
-        
+
       </td>
 
     </tr>

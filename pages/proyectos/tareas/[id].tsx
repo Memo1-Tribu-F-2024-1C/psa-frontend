@@ -17,6 +17,7 @@ export default function Tareas({ id }: { id: any }) {
   const [tareas, setTareas] = useState([]);
   const [proyecto, setProyecto] = useState([]);
   const [datos, setDatos] = useState({});
+  const [colaboradores, setColaboradores] = useState([])
 
   const router = useRouter();
   const [textFilter, setTextFilter] = useState('');
@@ -35,7 +36,7 @@ export default function Tareas({ id }: { id: any }) {
       });
   };
 
-  useEffect(() => {
+  const obtenerProyecto = () => {
     proyectosAxios.get(`/proyecto/${id}`)
       .then(response => {
         setProyecto(response.data);
@@ -43,9 +44,9 @@ export default function Tareas({ id }: { id: any }) {
       .catch(error => {
         console.error(error);
       });
-  }, [id]);
+  }
 
-  useEffect(() => {
+  const obtenerTareas = () => {
     proyectosAxios.get(`/proyecto/${id}/tareas`)
       .then(response => {
         setTareas(response.data);
@@ -53,7 +54,23 @@ export default function Tareas({ id }: { id: any }) {
       .catch(error => {
         console.error(error);
       });
-  }, [id]);
+  }
+
+  const obtenerColaboradores = () => {
+    proyectosAxios.get('/colaboradores')
+      .then(response => {
+        setColaboradores(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  useEffect(() => {
+    obtenerProyecto();
+    obtenerTareas();
+    obtenerColaboradores();
+  }, []);
 
   const tareasFiltradas = tareas
     .filter((tarea: any) => tarea['nombre'].toLowerCase().includes(textFilter.toLowerCase()))
@@ -82,7 +99,7 @@ export default function Tareas({ id }: { id: any }) {
             </svg>
             Crear Tarea
           </button>
-          <ModalCrearTarea isOpen={crearTareaModal} onClose={() => setCrearTareaModal(false)} guardarDatos={guardarDatos} idProyecto={id}>
+          <ModalCrearTarea colaboradores={colaboradores} isOpen={crearTareaModal} onClose={() => setCrearTareaModal(false)} guardarDatos={guardarDatos} idProyecto={id}>
             <button onClick={() => setCrearTareaModal(false)}>Guardar</button>
           </ModalCrearTarea>
         </div>
@@ -131,7 +148,7 @@ export default function Tareas({ id }: { id: any }) {
                 </thead>
                 <tbody>
                   {tareasFiltradas.map((tarea) => (
-                    <TareaGridRow key={tarea['id']} tarea={tarea} idProyecto={id} />
+                    <TareaGridRow key={tarea['id']} tarea={tarea} idProyecto={id} colaboradores={colaboradores} />
                   ))}
                 </tbody>
               </table>
