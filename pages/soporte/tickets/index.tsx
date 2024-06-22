@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { soportesAxios } from "@/api/axios";
+import TicketGridRow from "@/components/ticketGridRow";
 
 function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: boolean, isJustify?: boolean }) {
   return (
@@ -11,6 +12,7 @@ function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: bool
 }
 
 export default function Tickets() {
+  
   const [tickets, setTickets] = useState([]);
   const [datos, setDatos] = useState({});
 
@@ -22,12 +24,8 @@ export default function Tickets() {
   const [severidadSeleccionada, setSeveridadSeleccionada] = useState('Todas');
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
 
-  const guardarDatos = (datos: any) => {
-    // Guardar nuevo ticket
-  };
-
   useEffect(() => {
-    soportesAxios.get(`/soporte/tickets`)
+    soportesAxios.get(`/soporte/tickets/${router.query.id}`)
       .then(response => {
         setTickets(response.data);
       })
@@ -36,13 +34,6 @@ export default function Tickets() {
       });
   }, []);
 
-//   const ticketsFiltrados = tickets
-//     .filter((ticket: any) => [FILTRO])
-//     .filter((ticket: any) => [FILTRO])
-//     .filter((ticket: any) => [FILTRO])
-//     .filter((ticket: any) => [FILTRO])
-//     .filter((ticket: any) => [FILTRO]);
-
   return (
     <>
       <div className="container max-w-7xl mx-auto mt-8">
@@ -50,31 +41,6 @@ export default function Tickets() {
           <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Listado de Tickets</h1>
           <br />
           <hr />
-        </div>
-
-        <label className="text-l font-bold text-gray-300 decoration-gray-400">Filtrar por Estado: </label>
-          <select className='text-gray-600 border border-gray-300 rounded outline-infigo-700' onChange={(e) => setEstadoSeleccionado(e.target.value)}>
-            <option value="Todas">Todos</option>
-          </select>
-
-        <div className='space-x-4 my-5'>
-          <label className="text-l font-bold text-gray-300 decoration-gray-400">Filtrar por Producto: </label>
-          <select className='text-gray-600 border border-gray-300 rounded outline-infigo-700' onChange={(e) => setProductoSeleccionado(e.target.value)}>
-            <option value="Todos">Todos</option>
-          </select>
-
-          <label className="text-l font-bold text-gray-300 decoration-gray-400">Filtrar por Version: </label>
-          <select className='text-gray-600 border border-gray-300 rounded outline-infigo-700' onChange={(e) => setVersionSeleccionada(e.target.value)}>
-            <option value="Todas">Todas</option>
-          </select>
-
-          <label className="text-l font-bold text-gray-300 decoration-gray-400">Filtrar por Severidad: </label>
-          <select className='text-gray-600 border border-gray-300 rounded outline-infigo-700' onChange={(e) => setSeveridadSeleccionada(e.target.value)}>
-            <option value="Todas">Todas</option>
-          </select>
-
-          <label className="text-l font-bold text-gray-300 decoration-gray-400">Filtrar por Severidad: </label>
-          <input className='text-gray-600 border border-gray-300 rounded outline-infigo-700' onChange={(e) => setClienteSeleccionado(e.target.value)} />
         </div>
 
         <div className="flex flex-col">
@@ -88,15 +54,41 @@ export default function Tickets() {
                     <HeaderItem title="Severidad" />
                     <HeaderItem title="Fecha de Creación" />
                     <HeaderItem title="Tiempo Límite" />
-                    <HeaderItem title="Producto Asociado" />
+                    <HeaderItem title="Producto" />
                     <HeaderItem title="Versión" />
+                    <HeaderItem title="Cliente" />
                     <HeaderItem title="Acciones" isJustify={true} />
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {ticketsFiltrados.map((ticket) => (
-                    <TicketGridRow key={ticket['numero']} ticket={ticket} />
-                  ))} */}
+                  {[
+                    {
+                      id: 1,
+                      titulo: "sfsdsf",
+                      descripcion: "aferarg",
+                      estado: "Sgersg",
+                      severidad: "DERGERG",
+                      fechaCreacion: "01112019",
+                      deadline: "01112019",
+                      idProducto: "c32uid2",
+                      idVersion: "1.2",
+                      idCliente: 2,
+                    },
+                    {
+                      id: 2,
+                      titulo: "sfs3dsf",
+                      descripcion: "afe3rarg",
+                      estado: "Sgersg3",
+                      severidad: "DERGER3G",
+                      fechaCreacion: "02112019",
+                      deadline: "02112019",
+                      idProducto: "12e8y1d982",
+                      idVersion: "1.2",
+                      idCliente: 2
+                    },
+                  ].map((ticket) => (
+                    <TicketGridRow key={ticket['id']} ticket={ticket} />
+                  ))}
                 </tbody>
               </table>
             </div>

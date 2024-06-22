@@ -19,7 +19,6 @@ export interface Proyecto {
   fechaFinalizacion: string;
 }
 
-
 export interface Tarea {
   id: number;
   nombre: string;
@@ -49,4 +48,17 @@ export enum PrioridadTarea {
   ALTA = 'Alta',
   MEDIA= 'Media',
   BAJA = 'Baja',
+}
+
+export interface Ticket {
+  id: number;
+  titulo: string;
+  descripcion: string;
+  estado: string;
+  severidad: string;
+  fechaCreacion: string;
+  deadline: string;
+  idProducto: string;
+  idVersion: string;
+  idCliente: number;
 }
