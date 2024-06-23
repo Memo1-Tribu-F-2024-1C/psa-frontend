@@ -18,6 +18,7 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
         soportesAxios.get('/clientes')
             .then(response => {
                 setRecursos(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.error(error);
@@ -78,7 +79,7 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
                             <option value="null">No asignado</option>
                             {
                                 recursos.map((recursos) => (
-                                    <option key={recursos['id_cliente']} value={recursos['id_cliente']}> {recursos['razon_social']} </option>
+                                    <option key={recursos['id']} value={recursos['id']}> {recursos['razon social']} </option>
                                 ))
                             }
                         </select>

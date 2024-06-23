@@ -37,7 +37,7 @@ export default function TicketDetail({ params }: { params: { id: string } }) {
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
 
   useEffect(() => {
-    soportesAxios.get(`/soporte/tickets/${router.query.id}`)
+    soportesAxios.get(`/tickets/${router.query.id}`)
       .then(response => {
         setTickets(response.data);
       })
