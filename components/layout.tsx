@@ -20,18 +20,8 @@ export default function Layout({ children }: { children: any }) {
       title: "Usuarios",
     },
     {
-      href: "/productos",
-      title: "Productos"
-    },
-    {
       href: "/soporte",
-      title: "Soporte",
-      children: [
-        {
-          href: "/tickets",
-          title: "Tickets"
-        }
-      ]
+      title: "Soporte"
     },
   ]
 

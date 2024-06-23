@@ -51,14 +51,26 @@ export enum PrioridadTarea {
 }
 
 export interface Ticket {
-  id: number;
-  titulo: string;
-  descripcion: string;
-  estado: string;
-  severidad: string;
-  fechaCreacion: string;
-  deadline: string;
-  idProducto: string;
+  numero: number;
+  titulo?: string;
+  descripcion?: string;
+  estado?: string;
+  severidad?: string;
+  fechaCreacion?: string;
+  deadline?: string;
+  idProducto?: string;
   idVersion: string;
-  idCliente: number;
+  idCliente?: number;
+}
+
+export interface Producto {
+  codigo: string;
+  nombre: string;
+  versiones: VersionProducto[]
+}
+
+export interface VersionProducto {
+  codigo: string;
+  nombre: string;
+  fechaCreacion: string;
 }

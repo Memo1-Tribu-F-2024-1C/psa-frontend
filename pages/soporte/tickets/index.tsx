@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { soportesAxios } from "@/api/axios";
 import TicketGridRow from "@/components/ticketGridRow";
+import { useSearchParams } from 'next/navigation'
+import { Ticket } from "@/types/types";
 
 function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: boolean, isJustify?: boolean }) {
   return (
@@ -12,9 +14,11 @@ function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: bool
 }
 
 export default function Tickets() {
+  const searchParams = useSearchParams()
   
-  const [tickets, setTickets] = useState([]);
-  const [datos, setDatos] = useState({});
+  const version = searchParams.get('version')
+
+  const [tickets, setTickets] = useState<Ticket[]>([]);
 
   const router = useRouter();
   const [textFilter, setTextFilter] = useState('');
@@ -25,14 +29,40 @@ export default function Tickets() {
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
 
   useEffect(() => {
-    soportesAxios.get(`/soporte/tickets/${router.query.id}`)
-      .then(response => {
-        setTickets(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    // soportesAxios.get(`/soporte/tickets`)
+    //   .then(response => {
+    //     setTickets(response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+
+    setTickets([
+      {
+        numero: 131341,
+        idVersion: "ef1f1f12f12"
+      },
+      {
+        numero: 1323231,
+        idVersion: "erqqwdqg3r"
+      },
+      {
+        numero: 796771,
+        idVersion: "ef1f1f12f12"
+      },
+      {
+        numero: 2435302,
+        idVersion: "ef1f1f12f12"
+      },
+      {
+        numero: 1095877,
+        idVersion: "erqqwdqg3r"
+      },
+    ])
   }, []);
+
+  const ticketsFiltrados = tickets
+    .filter((ticket: any) => ticket.idVersion == version);
 
   return (
     <>
@@ -50,44 +80,19 @@ export default function Tickets() {
                 <thead>
                   <tr className="text-center">
                     <HeaderItem title="Nro de Ticket" />
-                    <HeaderItem title="Estado" />
-                    <HeaderItem title="Severidad" />
-                    <HeaderItem title="Fecha de Creación" />
-                    <HeaderItem title="Tiempo Límite" />
-                    <HeaderItem title="Producto" />
+                    {/* <HeaderItem title="Estado" /> */}
+                    {/* <HeaderItem title="Severidad" /> */}
+                    {/* <HeaderItem title="Fecha de Creación" /> */}
+                    {/* <HeaderItem title="Tiempo Límite" /> */}
+                    {/* <HeaderItem title="Producto" /> */}
                     <HeaderItem title="Versión" />
-                    <HeaderItem title="Cliente" />
+                    {/* <HeaderItem title="Cliente" /> */}
                     <HeaderItem title="Acciones" isJustify={true} />
                   </tr>
                 </thead>
                 <tbody>
-                  {[
-                    {
-                      id: 1,
-                      titulo: "sfsdsf",
-                      descripcion: "aferarg",
-                      estado: "Sgersg",
-                      severidad: "DERGERG",
-                      fechaCreacion: "01112019",
-                      deadline: "01112019",
-                      idProducto: "c32uid2",
-                      idVersion: "1.2",
-                      idCliente: 2,
-                    },
-                    {
-                      id: 2,
-                      titulo: "sfs3dsf",
-                      descripcion: "afe3rarg",
-                      estado: "Sgersg3",
-                      severidad: "DERGER3G",
-                      fechaCreacion: "02112019",
-                      deadline: "02112019",
-                      idProducto: "12e8y1d982",
-                      idVersion: "1.2",
-                      idCliente: 2
-                    },
-                  ].map((ticket) => (
-                    <TicketGridRow key={ticket['id']} ticket={ticket} />
+                  {ticketsFiltrados.map((ticket) => (
+                    <TicketGridRow key={ticket.numero} ticket={ticket} />
                   ))}
                 </tbody>
               </table>

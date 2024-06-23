@@ -15,7 +15,9 @@ const SideBarItem = ({ href, title, children }: ISidebarItem) => {
           className="flex items-center w-full p-2 text-white transition duration-75 rounded-lg group hover:bg-gray-700"
           aria-controls={`dropdown-${title}`}
           data-collapse-toggle={`dropdown-${title}`}
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            setOpen(!open)
+          }}
         >
           <span
             className={`flex-1 ml-2 text-left whitespace-nowrap ${

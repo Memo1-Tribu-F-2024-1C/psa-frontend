@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
+import VersionProductoGridRow from "@/components/VersionProductoGridRow"
 
 function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: boolean, isJustify?: boolean }) {
   return (
@@ -9,13 +10,39 @@ function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: bool
   );
 }
 
-export default function Versiones({ id }: { id: any }) {
+export default function ListarVersiones({ id }: { id: any }) {
+  
+  // versiones del producto asociado al id
+  const versiones = [ 
+    {
+      id: "3.2",
+      descripcion: "ipsum dolor",
+      fechaCreacion: "fechaaa",
+      duracionEstimada: 21345,
+      idProducto: "1",
+      idCliente: 1,
+    },
+    {
+      id: "3.2",
+      descripcion: "ipsum dolor",
+      fechaCreacion: "fechaaa",
+      duracionEstimada: 21345,
+      idProducto: "23iii2",
+      idCliente: 2,
+    }
+  ]
 
   return (
     <>
       <div className="container max-w-7xl mx-auto mt-8">
-        <div className="mb-4">
+      <div className="mb-4">
           <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Producto: {id} </h1>
+          <br />
+          <div>DETALLES<br/>DETALLES<br/>DETALLES<br/>DETALLES<br/></div>
+          <hr />
+        </div>
+
+        <div className="mb-4">
           <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Listado de Versiones</h1>
           <br />
           <hr />
@@ -31,15 +58,16 @@ export default function Versiones({ id }: { id: any }) {
                     <HeaderItem title="Nombre" />
                     <HeaderItem title="Descripción" />
                     <HeaderItem title="Fecha de Creación" />
-                    <HeaderItem title="Duración Estimada" />
                     <HeaderItem title="Acciones" isJustify={true} />
                   </tr>
                 </thead>
-                {/* <tbody>
-                  {versiones.map((version) => (
-                    <VersionGridRow key={version['id']} version={version} idProucto={id}/>
-                  ))}
-                </tbody> */}
+                {<tbody>
+                  {
+                    versiones.map((version: any) => (
+                      <VersionProductoGridRow key={version['id']} version={version}/>
+                    ))
+                  }
+                </tbody>}
               </table>
             </div>
           </div>

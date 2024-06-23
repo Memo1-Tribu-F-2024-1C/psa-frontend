@@ -25,7 +25,7 @@ export default function TicketDetail({ params }: { params: { id: string } }) {
     severidad: "DERGER3G",
     fechaCreacion: "02112019",
     deadline: "02112019",
-    idProducto: 2,
+    idProducto: "2",
     idVersion: "1.2",
     idCliente: 2
   }
