@@ -11,9 +11,9 @@ function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: bool
 }
 
 export default function ListarVersiones({ id }: { id: any }) {
-  
+
   // versiones del producto asociado al id
-  const versiones = [ 
+  const versiones = [
     {
       id: "3.2",
       descripcion: "ipsum dolor",
@@ -35,10 +35,10 @@ export default function ListarVersiones({ id }: { id: any }) {
   return (
     <>
       <div className="container max-w-7xl mx-auto mt-8">
-      <div className="mb-4">
+        <div className="mb-4">
           <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Producto: {id} </h1>
           <br />
-          <div>DETALLES<br/>DETALLES<br/>DETALLES<br/>DETALLES<br/></div>
+          <div>DETALLES<br />DETALLES<br />DETALLES<br />DETALLES<br /></div>
           <hr />
         </div>
 
@@ -64,7 +64,7 @@ export default function ListarVersiones({ id }: { id: any }) {
                 {<tbody>
                   {
                     versiones.map((version: any) => (
-                      <VersionProductoGridRow key={version['id']} version={version}/>
+                      <VersionProductoGridRow key={version['id']} version={version} codigoProducto={version['idProducto']}/>
                     ))
                   }
                 </tbody>}

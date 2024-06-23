@@ -20,18 +20,18 @@ export default function Soporte() {
 
   useEffect(() => {
     soportesAxios.get('/productos')
-       .then(response => {
-         setProductos(response.data);
-       })
-       .catch(error => {
+      .then(response => {
+        setProductos(response.data);
+      })
+      .catch(error => {
         console.error(error);
-       });
-    
+      });
+
   }, []);
 
   useEffect(() => {
     productoSeleccionado && setVersiones([productoSeleccionado.versiones || []])
-  },[productoSeleccionado])
+  }, [productoSeleccionado])
 
 
   return (
@@ -47,7 +47,7 @@ export default function Soporte() {
             value={productoSeleccionado ? productoSeleccionado.nombre : ''}
           >
             <option value="" disabled selected>Seleccionar producto</option>
-            {productos.map((producto: any) => <option value={producto.nombre}>{producto.nombre}</option>)}
+            {productos.map((producto: any) => <option key={producto.codigo} value={producto.nombre}>{producto.nombre}</option>)}
           </select>
           <br />
           <hr />
@@ -84,10 +84,7 @@ export default function Soporte() {
               </div>
             </div>
           </>
-
-
         }
-
 
       </div>
     </>

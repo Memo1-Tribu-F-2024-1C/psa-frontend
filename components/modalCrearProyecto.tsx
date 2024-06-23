@@ -104,7 +104,6 @@ const ModalCrearProyecto = ({ recursos, isOpen, onClose, guardarDatos, children 
 
       </div>
 
-
     </div>
   );
 }

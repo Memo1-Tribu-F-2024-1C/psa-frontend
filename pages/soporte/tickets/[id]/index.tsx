@@ -24,9 +24,12 @@ export default function TicketDetail({ params }: { params: { id: string } }) {
     estado: "Sgersg3",
     severidad: "DERGER3G",
     fechaCreacion: "02112019",
+    fechaLimite: "02112019",
     deadline: "02112019",
     idProducto: "2",
     idVersion: "1.2",
+    codigoVersion: "1",
+    cuitCliente: "21321",
     idCliente: 2
   }
   const [textFilter, setTextFilter] = useState('');
