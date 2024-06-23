@@ -1,28 +1,14 @@
-import { useEffect, useState } from 'react';
-import { proyectosAxios } from "@/api/axios";
+import { useState } from 'react';
+import { Usuario } from "@/types/types";
 import styles from './modalCrearProyecto.module.css';
 
-const ModalCrearProyecto = ({ isOpen, onClose, guardarDatos, children }: { isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; children: any }) => {
-
-  const [recursos, setRecursos] = useState([])
+const ModalCrearProyecto = ({ recursos, isOpen, onClose, guardarDatos, children }: { recursos: Array<Usuario>, isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; children: any }) => {
 
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [lider, setLider] = useState('');
   const [estado, setEstado] = useState("EMPEZADO");
   const [fechaFin, setFechaFin] = useState("");
-
-  // Consulto los recursos disponibles para asignar a las tareas
-  useEffect(() => {
-    proyectosAxios.get('/recursos')
-      .then(response => {
-        setRecursos(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      }); ``
-  }, []);
-
 
   return (
 
@@ -59,13 +45,13 @@ const ModalCrearProyecto = ({ isOpen, onClose, guardarDatos, children }: { isOpe
 
         <div className="grid gap-6 mb-6 md:grid-cols-2">
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lider del Proyecto:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lider:</label>
             <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
               onChange={(event) => { setLider(event.target.value) }}>
               <option value={lider}>...</option>
               {
                 recursos.map((recurso) => (
-                  <option key={recurso['legajo']} value={recurso['legajo']}>{recurso['Nombre']} {recurso['Apellido']}</option>
+                  <option key={recurso.legajo} value={recurso.legajo}>{recurso.Nombre} {recurso.Apellido}</option>
                 ))
               }
             </select>

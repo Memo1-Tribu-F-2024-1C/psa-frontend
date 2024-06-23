@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './modalCrearProyecto.module.css';
-import { proyectosAxios } from "@/api/axios";
-import IsLeaderNull from './isLiderNull';
+import { Usuario } from "@/types/types";
 
-const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children }: { isOpen: boolean; onClose: () => void; editarDatos: (datos: any) => void; proyecto: any; children: any }) => {
+const ModalEditarProyecto = ({recursos, isOpen, onClose, editarDatos, proyecto, children }: { recursos: Array<Usuario>,isOpen: boolean; onClose: () => void; editarDatos: (datos: any) => void; proyecto: any; children: any }) => {
 
     const diccionarioEstado: any = {
         "Empezado": "EMPEZADO",
@@ -12,7 +11,6 @@ const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children 
         "Suspendido": "SUSPENDIDO",
     }
 
-    const [recursos, setRecursos] = useState([])
     const [id, setId] = useState(proyecto['id'])
     const [nombre, setNombre] = useState(proyecto['nombre']);
     const [descripcion, setDescripcion] = useState(proyecto['descripcion']);
@@ -20,17 +18,6 @@ const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children 
     const [estado, setEstado] = useState(diccionarioEstado[proyecto['estado']]);
     const [fechaIni, setFechaIni] = useState(proyecto['fechaCreacion']);
     const [fechaFin, setFechaFin] = useState(proyecto['fechaFinalizacion']);
-
-    // Consulto los recursos disponibles para asignar a las tareas
-    useEffect(() => {
-        proyectosAxios.get('/recursos')
-            .then(response => {
-                setRecursos(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        }, []);
 
     return (
 
@@ -82,7 +69,7 @@ const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children 
                             onChange={(event) => { setLider(event.target.value) }} value={lider}>
                             <option value={proyecto['lider'] == null ? null : proyecto['lider']['id']}>...</option>
                             {
-                                recursos.map((recurso) => (
+                                recursos?.map((recurso) => (
                                     <option key={recurso['legajo']} value={recurso['legajo']}>{recurso['Nombre']} {recurso['Apellido']}</option>
                                 ))
                             }
@@ -133,10 +120,7 @@ const ModalEditarProyecto = ({ isOpen, onClose, editarDatos, proyecto, children 
                         Cancelar
                     </button>
                 </div>
-
             </div>
-
-
         </div>
     );
 }

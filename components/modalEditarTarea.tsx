@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import styles from './modalCrearProyecto.module.css';
 import { proyectosAxios } from "@/api/axios";
+import { Colaborador } from "@/types/types";
 
-const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, children }: { isOpen: boolean; onClose: () => void; editarDatos: (datos: any, tarea: any) => void; tarea: any; idProyecto: any; children: any }) => {
+const ModalEditarTarea = ({ colaboradores, isOpen, onClose, editarDatos, tarea, idProyecto, children }: { colaboradores: Array<Colaborador>, isOpen: boolean; onClose: () => void; editarDatos: (datos: any, tarea: any) => void; tarea: any; idProyecto: any; children: any }) => {
 
     const diccionarioEstado: any = {
         "Nuevo": "NUEVO",
@@ -17,28 +18,13 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
         "Baja": "BAJA",
     }
 
-    const [recursos, setRecursos] = useState([]);
     const [id, setId] = useState(tarea['id']);
     const [nombre, setNombre] = useState(tarea['nombre']);
     const [descripcion, setDescripcion] = useState(tarea['descripcion']);
     const [fechaIni, setFechaIni] = useState(tarea['fechaCreacion']);
     const [estado, setEstado] = useState(diccionarioEstado[tarea['estado']]);
-    const [prioridad, setPrioridad] = useState(diccionarioPrioridad [tarea['prioridad']]);
+    const [prioridad, setPrioridad] = useState(diccionarioPrioridad[tarea['prioridad']]);
     const [tecnico, setTecnico] = useState(tarea['colaborador'] === null ? null : tarea['colaborador']['id']);
-    //const [horasCalculadas, setHorasCalculadas] = useState(tarea['horasCalculadas']);
-
-
-    // Consulto los recursos disponibles para asignar a las tareas
-    useEffect(() => {
-        proyectosAxios.get('/colaboradores')
-            .then(response => {
-                setRecursos(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
-
 
     return (
 
@@ -68,7 +54,6 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                         type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese Nombre de la tarea" />
                 </div><br />
 
-
                 <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre:</label>
                     <input
@@ -85,7 +70,6 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                         id="message" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripción de la tarea..."></textarea>
                 </div><br />
 
-             
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Responsable de la Tarea:</label>
@@ -95,8 +79,8 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                             onChange={(event) => { setTecnico(event.target.value) }}>
                             <option value={tarea['colaborador'] == null ? null : tarea['colaborador']['id']}>...</option>
                             {
-                                recursos.map((recurso) => (
-                                    <option key={recurso['id']} value={recurso['id']}>{recurso['nombre']} {recurso['apellido']}</option>
+                                colaboradores?.map((colaborador) => (
+                                    <option key={colaborador.id} value={colaborador.id}>{colaborador.nombre} {colaborador.apellido}</option>
                                 ))
                             }
                         </select>
@@ -110,16 +94,15 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                             <option value="NUEVO">NUEVO</option>
                             <option value="EN_PROGRESO">EN PROGRESO</option>
                             <option value="BLOQUEADO">BLOQUEADO</option>
-                            <option value="CERRADO">CERRADO</option> 
+                            <option value="CERRADO">CERRADO</option>
                         </select>
                     </div>
-
 
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prioridad:</label>
                         <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
                             value={prioridad}
-                            onChange={(event) => {setPrioridad(event.target.value) }}>
+                            onChange={(event) => { setPrioridad(event.target.value) }}>
                             <option value="ALTA">ALTA</option>
                             <option value="MEDIA">MEDIA</option>
                             <option value="BAJA">BAJA</option>
@@ -127,7 +110,6 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                     </div>
 
                 </div><br />
-
 
                 <div className='flex flex-row-reverse gap-10'>
                     <button
@@ -151,13 +133,8 @@ const ModalEditarTarea = ({ isOpen, onClose, editarDatos, tarea, idProyecto, chi
                         Cancelar
                     </button>
                 </div>
-
-
-
-
             </div>
         </div>
-
 
     );
 }

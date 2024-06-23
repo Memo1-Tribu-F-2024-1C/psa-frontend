@@ -19,7 +19,6 @@ export default function Clientes() {
         console.error(error);
       });
   }, []);
-  
 
   return (
     <>

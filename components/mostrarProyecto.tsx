@@ -1,4 +1,3 @@
-import { Bigelow_Rules } from "next/font/google";
 import styles from "./mostrarProyecto.module.css";
 
 export default function MostrarProyecto({ proyecto, Tareas }: { proyecto: any; Tareas: any }) {
@@ -12,50 +11,54 @@ export default function MostrarProyecto({ proyecto, Tareas }: { proyecto: any; T
     return (
         <div className={styles.cajaProyecto}>
             <div className={styles.caja1} >
-                <div className="task-row my-1">
-                    <b>ID: </b> <b className=" text-gray-300"> {proyecto['id']+3672} </b> <br />
+                <div className='task-row my-1 flex'>
+                    <div className="w-40 font-semibold">ID proyecto: </div>
+                    <div className="flex-grow"> {proyecto['id'] + 3672}</div>
                 </div>
-                <div className="task-row my-1">
-                    <b>Nombre: </b><b className=" text-gray-300"> {proyecto['nombre']} </b><br />
+                <div className='task-row my-1 flex'>
+                    <div className="w-40 font-semibold">Nombre: </div>
+                    <div className="flex-grow"> {proyecto['nombre']}</div>
                 </div>
-                <div className="task-row my-1">
-                    <b>Descripción: </b><b className=" text-gray-300"> {proyecto['descripcion']} </b><br />
+                <div className='task-row my-1 flex'>
+                    <div className="w-40 font-semibold">Descripción: </div>
+                    <div className="flex-grow"> {proyecto['descripcion']}</div>
                 </div>
-                <div className="task-row my-1">
-                    <b>Lider: </b>
-                    {proyecto['lider'] ? (
-                        <b className=" text-gray-300">{proyecto['lider'].nombre} {proyecto['lider'].apellido}</b>
-                    ) :
+                <div className='task-row my-1 flex'>
+                    <div className="w-40 font-semibold">Lider: </div>
+                    <div className="flex-grow">{proyecto['lider'] ?
+                        (<b className="font-normal">{proyecto['lider'].nombre} {proyecto['lider'].apellido}</b>) :
+                        (<span className="font-normal">No asignado</span>)}</div>
+                </div>
 
-                        (
-                            <span className="text-gray-300">No asignado</span>
-                        )}
-                    <br />
-                </div>
-                <div className="task-row my-1">
-                    <b>Estado proyecto: </b><b className=" text-gray-300"> {proyecto['estado']} </b><br />
+                <div className='task-row my-1 flex'>
+                    <div className="w-40 font-semibold">Estado proyecto: </div>
+                    <div className="flex-grow"> {proyecto['estado']}</div>
                 </div>
             </div>
 
             <div className={styles.caja2}>
                 <div className="task-container">
-                    <div className="task-row my-1">
-                        <b>Tareas nuevas:</b><span className= "whitespace-pre">                {nuevas}</span>
+                    <div className='task-row my-1 flex font-normal'>
+                        <div className="w-60 ">Tareas nuevas: </div>
+                        <div className="flex-grow"> {nuevas}</div>
                     </div>
-                    <div className="task-row my-1">
-                        <b>Tareas en progreso:</b><span className= "whitespace-pre">       {enProgreso}</span>
+                    <div className='task-row my-1 flex font-normal'>
+                        <div className="w-60 ">Tareas en progreso: </div>
+                        <div className="flex-grow"> {enProgreso}</div>
                     </div>
-                    <div className="task-row my-1">
-                        <b>Tareas bloqueadas:</b><span className= "whitespace-pre">        {bloqueado}</span>
+                    <div className='task-row my-1 flex font-normal'>
+                        <div className="w-60 ">Tareas bloqueadas: </div>
+                        <div className="flex-grow"> {bloqueado}</div>
                     </div>
-                    <div className="task-row my-1">
-                        <b>Tareas cerradas:</b><span className= "whitespace-pre">             {cerradas}</span>
+                    <div className='task-row my-1 flex font-normal'>
+                        <div className="w-60 ">Tareas cerradas: </div>
+                        <div className="flex-grow"> {cerradas}</div>
                     </div>
-                    <div className="task-row my-1">
-                        <b>Total de tareas:</b><span className= "whitespace-pre">              {cantidadTareas}</span>
+                    <div className='task-row my-1 flex font-semibold text-xl'>
+                        <div className="w-60 italic">Total de tareas: </div>
+                        <div className="flex-grow"> {cantidadTareas}</div>
                     </div>
                 </div>
-
             </div>
         </div>
     )
