@@ -18,7 +18,6 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
         soportesAxios.get('/clientes')
             .then(response => {
                 setRecursos(response.data);
-                console.log(response.data);
             })
             .catch(error => {
                 console.error(error);
