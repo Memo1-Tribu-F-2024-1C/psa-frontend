@@ -12,16 +12,16 @@ export default function Layout({ children }: { children: any }) {
       title: "Proyectos",
     },
     {
-      href: "/productos",
-      title: "Productos",
-    },
-    {
       href: "/clientes",
       title: "Clientes",
     },
     {
       href: "/usuarios",
       title: "Usuarios",
+    },
+    {
+      href: "/soporte",
+      title: "Soporte"
     },
   ]
 

@@ -13,7 +13,7 @@ export interface Colaborador {
 export interface Cliente {
   id: string
   razon_social: string
-  cuit: number
+  cuit: string
 }
 
 export interface Proyecto {
@@ -68,4 +68,30 @@ export enum PrioridadTarea {
   ALTA = 'Alta',
   MEDIA = 'Media',
   BAJA = 'Baja',
+}
+
+export interface Ticket {
+  numeroTicket: number;
+  titulo: string;
+  descripcion: string;
+  estado: string;
+  severidad: string;
+  fechaDeCreacion: string;
+  fechaLimite: string;
+  idTareas: any;
+  codigoVersion: number;
+  cuitCliente: any;
+}
+
+export interface Producto {
+  codigo: number;
+  nombre: string;
+  versiones: VersionProducto[]
+}
+
+export interface VersionProducto {
+  codigo: number;
+  nombre: string;
+  fechaCreacion: string;
+  idProducto: number;
 }
