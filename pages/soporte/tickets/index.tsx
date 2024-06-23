@@ -29,7 +29,7 @@ export default function Tickets() {
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
 
   useEffect(() => {
-    soportesAxios.get(`/tickets`)
+    soportesAxios.get(`/tickets/`)
       .then(response => {
         setTickets(response.data);
       })

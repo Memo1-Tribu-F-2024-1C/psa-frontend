@@ -19,7 +19,7 @@ export default function VersionProductoGridRow({ version, codigoProducto }: {  v
 
   const [datos, setDatos] = useState({})
   const guardarDatos = (datos: any) => {
-      soportesAxios.post('/tickets', datos)
+      soportesAxios.post('/tickets/', datos)
         .then(response => {
           setDatos(response.data);
           window.location.reload();

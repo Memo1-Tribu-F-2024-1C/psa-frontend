@@ -78,7 +78,7 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
                             <option value="null">No asignado</option>
                             {
                                 recursos.map((recursos) => (
-                                    <option key={recursos['id']} value={recursos['id']}> {recursos['razon social']} </option>
+                                    <option key={recursos['id']} value={recursos['CUIT']}> {recursos['razon social']} </option>
                                 ))
                             }
                         </select>
@@ -116,8 +116,11 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
             <div className='flex flex-row-reverse gap-10'>
                 <button
                     onClick={() => {
+                        // guardarDatos({ numero: numero, descripcion: descripcion, estado: estado, severidad: severidad, fechaCreacion: fechaCreacion, 
+                        //                 deadline: deadline, codigoProducto: codigoProducto, idVersion: codigoVersion, cliente: cliente });
+                        
                         guardarDatos({ numero: numero, descripcion: descripcion, estado: estado, severidad: severidad, fechaCreacion: fechaCreacion, 
-                                        deadline: deadline, idProducto: codigoProducto, idVersion: codigoVersion, cliente: cliente });
+                                         fechaLimite: deadline, codigoProducto: codigoProducto, codigoVersion: codigoVersion, cuitCliente: cliente });
                           onClose()
                     }}
                     className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md">
