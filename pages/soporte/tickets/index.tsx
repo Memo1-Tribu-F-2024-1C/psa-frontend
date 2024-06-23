@@ -29,36 +29,13 @@ export default function Tickets() {
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
 
   useEffect(() => {
-    // soportesAxios.get(`/soporte/tickets`)
-    //   .then(response => {
-    //     setTickets(response.data);
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-
-    setTickets([
-      {
-        numero: 131341,
-        idVersion: "ef1f1f12f12"
-      },
-      {
-        numero: 1323231,
-        idVersion: "erqqwdqg3r"
-      },
-      {
-        numero: 796771,
-        idVersion: "ef1f1f12f12"
-      },
-      {
-        numero: 2435302,
-        idVersion: "ef1f1f12f12"
-      },
-      {
-        numero: 1095877,
-        idVersion: "erqqwdqg3r"
-      },
-    ])
+    soportesAxios.get(`/soporte/tickets`)
+      .then(response => {
+        setTickets(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }, []);
 
   const ticketsFiltrados = tickets

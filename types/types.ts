@@ -5,9 +5,9 @@ export interface Usuario {
 }
 
 export interface Cliente {
-  id: string
+  id_cliente: string
   razon_social: string
-  cuit: number
+  cuit: string
 }
 
 export interface Proyecto {
@@ -52,25 +52,25 @@ export enum PrioridadTarea {
 
 export interface Ticket {
   numero: number;
-  titulo?: string;
-  descripcion?: string;
-  estado?: string;
-  severidad?: string;
-  fechaCreacion?: string;
-  deadline?: string;
-  idProducto?: string;
-  idVersion: string;
-  idCliente?: number;
+  descripcion: string;
+  estado: string;
+  severidad: string;
+  fechaCreacion: string;
+  deadline: string;
+  idProducto: number;
+  idVersion: number;
+  cliente: any;
 }
 
 export interface Producto {
-  codigo: string;
+  codigo: number;
   nombre: string;
   versiones: VersionProducto[]
 }
 
 export interface VersionProducto {
-  codigo: string;
+  codigo: number;
   nombre: string;
   fechaCreacion: string;
+  idProducto: number;
 }

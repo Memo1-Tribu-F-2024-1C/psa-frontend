@@ -1,27 +1,22 @@
 import { useEffect, useState } from "react";
 import ClientGridRow from "@/components/clientGridRow";
+import { soportesAxios } from "@/api/axios";
 
 function HeaderItem({ title }: { title: string }) {
-  return <th className="px-6 py-3 text-sm text-left text-gray-500 border-b border-gray-200 bg-gray-50">{title}</th>
+  return <th className="px-6 py-3 text-sm text-left  uppercase text-gray-200 border-b border-gray-200">{title}</th>
 }
 
 export default function Clientes() {
   const [list, setList] = useState([])
 
   useEffect(() => {
-    fetch("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
+    soportesAxios.get('/clientes')
+      .then(response => {
+        console.log(response.data)
+        setList(response.data);
       })
-      .then((data) => {
-        console.log(data);
-        // Maneja los datos de la respuesta aquí
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
+      .catch(error => {
+        console.error(error);
       });
   }, []);
   
@@ -30,11 +25,11 @@ export default function Clientes() {
     <>
       <div className="container max-w-7xl mx-auto mt-8">
         <div className="mb-4">
-          <h1 className="text-3xl font-bold decoration-gray-400 text-gray-900">Clientes</h1>
+          <h1 className="text-3xl font-bold decoration-gray-400 text-gray-200">Clientes</h1>
         </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-            <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
+            <div className="inline-block min-w-full overflow-hidden align-middle  border-b border-r border-l border-t border-solid border-gray-200 shadow sm:rounded-lg">
               <table className="min-w-full">
                 <thead>
                   <tr>
