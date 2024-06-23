@@ -41,7 +41,7 @@ export default function Clientes() {
 
                 <tbody>
                   {list.map((cliente) => (
-                    <ClientGridRow key={cliente['razon_social']} cliente={cliente} />
+                    <ClientGridRow key={cliente['id']} cliente={cliente} />
                   ))}
                 </tbody>
               </table>

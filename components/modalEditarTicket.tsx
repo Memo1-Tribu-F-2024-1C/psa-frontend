@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import styles from './modalCrearProyecto.module.css';
 import { soportesAxios } from "@/api/axios";
+import  {Ticket} from "@/types/types";
 
-const ModalEditarTicket = ({ isOpen, onClose, editarDatos, ticket, children }: { isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; idProyecto: any; children: any }) => {
+const ModalEditarTicket = ({ isOpen, onClose, editarDatos, ticket, children }: { isOpen: boolean; onClose: () => void; editarDatos: (datos: any) => void; ticket: Ticket; children: any }) => {
 
     const [recursos, setRecursos] = useState([]);
     const [descripcion, setDescripcion] = useState(ticket["descripcion"]);
     const [estado, setEstado] = useState(ticket["estado"]);
     const [severidad, setSeveridad] = useState(ticket["severidad"]);
-    const [deadline, setDeadline] = useState(ticket["deadline"]);
-    const [cliente, setCliente] = useState(ticket['cliente'] === null ? null : ticket['cliente']['id']);
+    const [deadline, setDeadline] = useState(ticket["fechaLimite"]);
+    const [cliente, setCliente] = useState(ticket['cuitCliente'] === null ? null : ticket['cuitCliente']['id']);
 
     useEffect(() => {
         soportesAxios.get('/soporte/clientes')
@@ -104,7 +105,7 @@ const ModalEditarTicket = ({ isOpen, onClose, editarDatos, ticket, children }: {
             <div className='flex flex-row-reverse gap-10'>
                 <button
                     onClick={() => {
-                        editarDatos({ numero: ticket["numero"], descripcion: descripcion, estado: estado, severidad: severidad, deadline: deadline, clienteId: ticket["cliente"], idProducto: ticket["idProducto"], idVersion: ["idVersion"]});
+                        editarDatos({ numero: ticket["numeroTicket"], descripcion: descripcion, estado: estado, severidad: severidad, fechaLimite: deadline, cuitCliente: ticket["cuitCliente"], codigoVersion: ticket["codigoVersion"]});
                           onClose()
                     }}
                     className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md">

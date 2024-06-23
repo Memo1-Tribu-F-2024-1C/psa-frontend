@@ -5,7 +5,7 @@ export interface Usuario {
 }
 
 export interface Cliente {
-  id_cliente: string
+  id: string
   razon_social: string
   cuit: string
 }
@@ -51,15 +51,16 @@ export enum PrioridadTarea {
 }
 
 export interface Ticket {
-  numero: number;
+  numeroTicket: number;
+  titulo: string;
   descripcion: string;
   estado: string;
   severidad: string;
-  fechaCreacion: string;
-  deadline: string;
-  idProducto: number;
-  idVersion: number;
-  cliente: any;
+  fechaDeCreacion: string;
+  fechaLimite: string;
+  idTareas: any;
+  codigoVersion: number;
+  cuitCliente: any;
 }
 
 export interface Producto {

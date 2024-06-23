@@ -10,46 +10,21 @@ export default function VersionProductoGridRow({ version, codigoProducto }: {  v
 
   const router = useRouter();
 
-  const [modalEliminar, setModalEliminar] = useState({
-    isOpen: false,
-    todo: {}
-  })
-
   const [crearTicketModal, setCrearTicketModal] = useState(false)
 
   const [datos, setDatos] = useState({})
+  
   const guardarDatos = (datos: any) => {
-      soportesAxios.post('/tickets/', datos)
+      console.log(datos);
+      soportesAxios.post('/tickets', datos)
         .then(response => {
           setDatos(response.data);
-          window.location.reload();
+          // window.location.reload();
         })
         .catch(error => {
           console.error(error);
         });
     }
-  const BorrarProyecto = async (proyecto: any) => {
-    console.log(proyecto.id);
-    proyectosAxios.delete(`proyecto/${proyecto.id}`)
-      .then(response => {
-        setModalEliminar({ isOpen: false, todo: {} });
-        window.location.reload();
-      })
-      .catch(error => {
-        console.error('Error:', error); 
-      });
-  };
-
-const editarDatos = (datos: any) => {
-  proyectosAxios.put('/versiones', datos)
-    .then(response => {
-      setDatos(response.data);
-      window.location.reload();
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}
 
 
   return (
@@ -90,7 +65,6 @@ const editarDatos = (datos: any) => {
           Ver tickets asociados
         </button>
 
-        
       </td>
 
     </tr>

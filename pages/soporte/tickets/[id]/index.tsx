@@ -64,10 +64,10 @@ export default function TicketDetail({ params }: { params: { id: string } }) {
               estado: {ticket.estado}<br/>
               severidad: {ticket.severidad}<br/>
               fechaCreacion: {ticket.fechaCreacion}<br/>
-              deadline: {ticket.deadline}<br/>
-              idProducto: {ticket.idProducto}<br/>
-              idVersion: {ticket.idVersion}<br/>
-              idCliente: {ticket.idCliente}<br/>
+              fechaLimite: {ticket.fechaLimite}<br/>
+              {/* idProducto: {ticket.idProducto}<br/> */}
+              codigoVersion: {ticket.codigoVersion}<br/>
+              cuitCliente: {ticket.cuitCliente}<br/>
             </div>
           </div>
         </div>

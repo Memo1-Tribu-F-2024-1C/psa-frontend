@@ -4,10 +4,11 @@ import { soportesAxios } from "@/api/axios";
 
 const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codigoVersion, children }: { isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; codigoProducto: number; codigoVersion: number; children: any }) => {
 
-    const [recursos, setRecursos] = useState([])
+    const [recursos, setRecursos] = useState([]);
 
+    const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
-    const [estado, setEstado] = useState("NUEVO");
+    const [estado, setEstado] = useState("Nuevo");
     const [severidad, setSeveridad] = useState("S1");
     const [deadline, setDeadline] = useState('');
     const [cliente, setCliente] = useState('');
@@ -27,7 +28,7 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
     useEffect(() => {
         const formattedDate = new Date().toLocaleDateString('en-US', {
           year: 'numeric',
-          month: 'long',
+          month: 'numeric',
           day: 'numeric'
         });
         setFechaCreacion(formattedDate);
@@ -53,6 +54,13 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
                 <h1 className='text-3xl font-bold decoration-gray-400'>Crear Ticket</h1>
                 <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
 
+
+                <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo:</label>
+                    <input
+                        onChange={(event) => { setTitulo(event.target.value); }}
+                        type="text" id="first_name" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese titulo del ticket" required />
+                </div><br />
 
                 <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción:</label>
@@ -88,13 +96,13 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
                         <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
                             onChange={(event) => { setEstado(event.target.value) }}>
 
-                        <option value="Nuevo">NUEVO</option>
-                        <option value="Progreso">EN PROGRESO</option>
-                        <option value="Esperando Desarrollo">ESPERANDO DESARROLLO</option>
-                        <option value="Esperando Cliente">ESPERANDO CLIENTE</option>
-                        <option value="Resuelto esperando confirmacion">RESUELTO ESPERANDO CONFIRMACION</option>
-                        <option value="Cerrado">CERRADO</option>
-                        <option value="Cerrado">BLOQUEADO</option>
+                        <option value="Nuevo">Nuevo</option>
+                        <option value="Progreso">Progreso</option>
+                        <option value="Esperando desarrollo">Esperando desarrollo</option>
+                        <option value="Esperando Cliente">Esperando cliente</option>
+                        <option value="Resuelto esperando confirmacion">Resuelto esperando confirmacion</option>
+                        <option value="Cerrado">Cerrado</option>
+                        <option value="Cerrado">Bloqueado</option>
                                 
                         </select>
                     </div>
@@ -116,11 +124,8 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
             <div className='flex flex-row-reverse gap-10'>
                 <button
                     onClick={() => {
-                        // guardarDatos({ numero: numero, descripcion: descripcion, estado: estado, severidad: severidad, fechaCreacion: fechaCreacion, 
-                        //                 deadline: deadline, codigoProducto: codigoProducto, idVersion: codigoVersion, cliente: cliente });
-                        
-                        guardarDatos({ numero: numero, descripcion: descripcion, estado: estado, severidad: severidad, fechaCreacion: fechaCreacion, 
-                                         fechaLimite: deadline, codigoProducto: codigoProducto, codigoVersion: codigoVersion, cuitCliente: cliente });
+                        guardarDatos({ titulo: titulo, descripcion: descripcion, severidad: severidad, estado: estado, 
+                                         fechaLimite: deadline, cuitCliente: cliente, codigoVersion: codigoVersion });
                           onClose()
                     }}
                     className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md">

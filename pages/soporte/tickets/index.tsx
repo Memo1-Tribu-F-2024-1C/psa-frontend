@@ -29,8 +29,9 @@ export default function Tickets() {
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
 
   useEffect(() => {
-    soportesAxios.get(`/tickets/`)
+    soportesAxios.get(`versiones/${version}/tickets`)
       .then(response => {
+        console.log(response.data);
         setTickets(response.data);
       })
       .catch(error => {
@@ -38,8 +39,8 @@ export default function Tickets() {
       });
   }, []);
 
-  const ticketsFiltrados = tickets
-    .filter((ticket: any) => ticket.idVersion == version);
+  const ticketsFiltrados = tickets;
+    // .filter((ticket: any) => ticket.idVersion == version);
 
   return (
     <>
@@ -57,19 +58,18 @@ export default function Tickets() {
                 <thead>
                   <tr className="text-center">
                     <HeaderItem title="Nro de Ticket" />
-                    {/* <HeaderItem title="Estado" /> */}
-                    {/* <HeaderItem title="Severidad" /> */}
-                    {/* <HeaderItem title="Fecha de Creación" /> */}
-                    {/* <HeaderItem title="Tiempo Límite" /> */}
-                    {/* <HeaderItem title="Producto" /> */}
-                    <HeaderItem title="Versión" />
-                    {/* <HeaderItem title="Cliente" /> */}
+                    <HeaderItem title="Titulo" />
+                    <HeaderItem title="Estado" />
+                    <HeaderItem title="Severidad" />
+                    <HeaderItem title="Fecha de Creación" />
+                    <HeaderItem title="Tiempo Límite" />
+                    <HeaderItem title="Cliente" /> 
                     <HeaderItem title="Acciones" isJustify={true} />
                   </tr>
                 </thead>
                 <tbody>
                   {ticketsFiltrados.map((ticket) => (
-                    <TicketGridRow key={ticket.numero} ticket={ticket} />
+                    <TicketGridRow key={ticket.numeroTicket} ticket={ticket} />
                   ))}
                 </tbody>
               </table>
