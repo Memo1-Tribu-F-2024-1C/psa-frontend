@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { soportesAxios } from "@/api/axios";
 import TicketGridRowSoporte from "@/components/ticketGridRowSoporte";
 import { useSearchParams } from 'next/navigation'
-import { Ticket } from "@/types/types";
+import { Ticket, VersionProducto, Producto } from "@/types/types";
 import styles from '@/components/tickets.module.css';
 
 import Link from 'next/link'
@@ -31,6 +31,8 @@ export default function Tickets() {
   const [versionSeleccionada, setVersionSeleccionada] = useState('Todas');
   const [severidadSeleccionada, setSeveridadSeleccionada] = useState('Todas');
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
+  const [version, setVersion] = useState({} as VersionProducto);
+  const [producto, setProducto] = useState({} as Producto);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,6 +48,26 @@ export default function Tickets() {
       fetchData();
     }
   }, [codigoVersion, codigoProducto]);
+
+  useEffect(() => { 
+    soportesAxios.get(`/versiones/${codigoVersion}`)
+        .then(response => {
+            setVersion(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        }); ``
+  }, []);
+
+  useEffect(() => { 
+    soportesAxios.get(`/productos/${codigoProducto}`)
+        .then(response => {
+            setProducto(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        }); ``
+  }, []);
 
   const ticketsFiltrados = tickets;
     // .filter((ticket: any) => ticket.idVersion == version);
@@ -66,7 +88,7 @@ export default function Tickets() {
             </svg>
             
           </button>
-          <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Listado de Tickets</h1>
+          <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Listado de Tickets  - {producto.nombre} - {version.nombre}</h1>
           <br />
           <hr />
         </div>
