@@ -1,0 +1,13 @@
+/* Tickets.module.css */
+.tableHeader th {
+    border-bottom: 2px solid #e2e8f0; /* Border to separate header */
+  }
+  
+  .colTicket { width: 5%; }
+  .colTitle { width: 15%; }
+  .colStatus { width: 10%; }
+  .colSeverity { width: 5%; }
+  .colCreation { width: 15%; }
+  .colDeadline { width: 15%; }
+  .colClient { width: 15%; }
+  .colActions { width: 10%; }

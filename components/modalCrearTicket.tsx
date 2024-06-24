@@ -3,7 +3,7 @@ import styles from './modalCrearProyecto.module.css';
 import { soportesAxios, proyectosAxios } from "@/api/axios";
 import Select, {StylesConfig} from "react-select";
 import { Tarea } from "@/types/types"
-import ModalCrearTarea from "@/components/modalCrearTarea";
+import ModalCrearTareaDesdeTicket from "@/components/modalCrearTareaDesdeTicket";
 
 const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codigoVersion, children }: { isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; codigoProducto: number; codigoVersion: number; children: any }) => {
 
@@ -19,7 +19,8 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
     const [tareasSeleccionadas, setTareasSeleccionadas] = useState([]);
     const [fechaCreacion, setFechaCreacion] = useState('');
     const [crearTareaModal, setCrearTareaModal] = useState(false);
-    const [colaboradores, setColaboradores] = useState([])
+    const [colaboradores, setColaboradores] = useState([]);
+    const [proytectos, setProyectos] = useState([]);
 
     useEffect(() => { 
         soportesAxios.get('/clientes')
@@ -35,6 +36,28 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
         proyectosAxios.get('/tareas')
             .then(response => {
                 setTareas(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            }); ``
+    }, []);
+
+    useEffect(() => {
+        if (!crearTareaModal) { // Solo cargamos las tareas nuevamente si el modal de crear tarea se ha cerrado
+            proyectosAxios.get('/tareas')
+                .then(response => {
+                    setTareas(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    }, [crearTareaModal]); 
+
+    useEffect(() => {
+        proyectosAxios.get('/colaboradores')
+            .then(response => {
+                setColaboradores(response.data);
             })
             .catch(error => {
                 console.error(error);
@@ -160,7 +183,7 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
 
                         </select>
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-4 flex justify-center">
                        <button
                          onClick={() => setCrearTareaModal(true)}
                          className="inline-flex items-center px-4 py-3 bg-blue-500 hover:bg-blue-700 text-white text-sm font-medium rounded-md"
@@ -170,9 +193,9 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
                          </svg>
                          Crear Tarea
                        </button>
-                       <ModalCrearTarea colaboradores={colaboradores} isOpen={crearTareaModal} onClose={() => setCrearTareaModal(false)} guardarDatos={guardarDatos} idProyecto={null}>
-                         <button onClick={() => setCrearTareaModal(false)}>Guardar</button>
-                       </ModalCrearTarea>
+                       <ModalCrearTareaDesdeTicket colaboradores={colaboradores} isOpen={crearTareaModal} onClose={() => setCrearTareaModal(false)}>
+                         <button onClick={() => setCrearTareaModal(false)}>asdfs</button>
+                       </ModalCrearTareaDesdeTicket>
                      </div>
                 </div><br />
             </div><br />

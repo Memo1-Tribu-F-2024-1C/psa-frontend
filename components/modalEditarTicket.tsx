@@ -140,8 +140,8 @@ const ModalEditarTicket = ({ isOpen, onClose, editarDatos, ticket, children }: {
 
                             <option value="Nuevo" selected={"Nuevo" == estado}>Nuevo</option>
                             <option value="Progreso" selected={"Progreso" == estado}>Progreso</option>
-                            <option value="Esperando Desarrollo" selected={"Esperando Desarrollo" == estado}>Esperando desarrollo</option>
-                            <option value="Esperando Cliente" selected={"Esperando Cliente" == estado}>Esperando cliente</option>
+                            <option value="Esperando desarrollo" selected={"Esperando desarrollo" == estado}>Esperando desarrollo</option>
+                            <option value="Esperando cliente" selected={"Esperando cliente" == estado}>Esperando cliente</option>
                             <option value="Resuelto esperando confirmacion" selected={"Resuelto esperando confirmacion" == estado}>Resuelto esperando confirmacion</option>
                             <option value="Cerrado" selected={"Cerrado" == estado}>Cerrado</option>
                             <option value="Bloqueado" selected={"Bloqueado" == estado}>Bloqueado</option>
@@ -167,7 +167,7 @@ const ModalEditarTicket = ({ isOpen, onClose, editarDatos, ticket, children }: {
             <div className='flex flex-row-reverse gap-10'>
                 <button
                     onClick={() => {
-                        editarDatos({ numero: ticket["numeroTicket"], descripcion: descripcion, estado: estado, severidad: severidad, fechaLimite: deadline, cuitCliente: ticket["cuitCliente"], codigoVersion: ticket["codigoVersion"], idTareas: tareasSeleccionadas});
+                        editarDatos({ numero: ticket["numeroTicket"], titulo: titulo, descripcion: descripcion, estado: estado, severidad: severidad, fechaLimite: deadline, cuitCliente: ticket["cuitCliente"], codigoVersion: ticket["codigoVersion"], idTareas: tareasSeleccionadas});
                           onClose()
                     }}
                     className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md">

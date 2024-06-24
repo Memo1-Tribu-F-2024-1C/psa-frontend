@@ -4,6 +4,8 @@ import { soportesAxios } from "@/api/axios";
 import TicketGridRowSoporte from "@/components/ticketGridRowSoporte";
 import { useSearchParams } from 'next/navigation'
 import { Ticket } from "@/types/types";
+import styles from '@/components/tickets.module.css';
+
 import Link from 'next/link'
 
 function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: boolean, isJustify?: boolean }) {
@@ -31,15 +33,19 @@ export default function Tickets() {
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
 
   useEffect(() => {
-    soportesAxios.get(`versiones/${codigoVersion}/tickets`)
-      .then(response => {
-        console.log(response.data);
+    const fetchData = async () => {
+      try {
+        const response = await soportesAxios.get(`versiones/${codigoVersion}/tickets`);
         setTickets(response.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error(error);
-      });
-  }, []);
+      }
+    };
+
+    if (codigoVersion && codigoProducto) {
+      fetchData();
+    }
+  }, [codigoVersion, codigoProducto]);
 
   const ticketsFiltrados = tickets;
     // .filter((ticket: any) => ticket.idVersion == version);
@@ -68,22 +74,22 @@ export default function Tickets() {
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div className="inline-block min-w-full overflow-hidden align-middle border-b border-r border-l border-t border-solid border-gray-200 shadow sm:rounded-lg">
-              <table className="min-w-full">
+              <table>
                 <thead>
-                  <tr className="text-center">
-                    <HeaderItem title="Nro de Ticket" isJustify={true}/>
-                    <HeaderItem title="Titulo" isJustify={true}/>
-                    <HeaderItem title="Estado" isJustify={true}/>
-                    <HeaderItem title="Severidad" isJustify={true}/>
-                    <HeaderItem title="Fecha de Creación" isJustify={true}/>
-                    <HeaderItem title="Tiempo Límite" isJustify={true}/>
-                    <HeaderItem title="Cliente" isJustify={true}/> 
-                    <HeaderItem title="Acciones" isJustify={true} />
+                  <tr className={`text-center ${styles.tableHeader}`}>
+                    <th className={`text-center${styles.colTicket}`} >Nro de Ticket</th>
+                    <th className={styles.colTitle}>Titulo</th>
+                    <th className={`w-100${styles.colStatus}`}>Estado</th>
+                    <th className={styles.colSeverity}>Severidad</th>
+                    <th className={styles.colCreation}>Fecha de Creación</th>
+                    <th className={styles.colDeadline}>Tiempo Límite</th>
+                    <th className={styles.colClient}>Cliente</th>
+                    <th className={styles.colActions}>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {ticketsFiltrados.map((ticket) => (
-                    <TicketGridRowSoporte key={ticket.numeroTicket} ticket={ticket} />
+                    <TicketGridRowSoporte key={ticket.numeroTicket} ticket={ticket}/>
                   ))}
                 </tbody>
               </table>
