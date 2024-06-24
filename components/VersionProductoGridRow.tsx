@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { VersionProducto } from "@/types/types";
 import { useRouter } from 'next/router';
-import { proyectosAxios } from "@/api/axios";
-import FormatDate from "@/components/formatDate";
 import ModalCrearTicket from "./modalCrearTicket";
 import { soportesAxios } from "@/api/axios";
 
@@ -25,7 +23,6 @@ export default function VersionProductoGridRow({ version, codigoProducto }: {  v
         });
     }
     
-
 
   return (
     <tr key={`${version.codigo}`}>

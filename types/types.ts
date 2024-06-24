@@ -43,7 +43,7 @@ export interface Ticket {
   severidad: string;
   estado: string;
   fechaLimite: string;
-  fechaCreacion: string;
+  fechaDeCreacion: string;
   cuitCliente: string;
   codigoVersion: number,
   codigoProducto: number,
@@ -68,19 +68,6 @@ export enum PrioridadTarea {
   ALTA = 'Alta',
   MEDIA = 'Media',
   BAJA = 'Baja',
-}
-
-export interface Ticket {
-  numeroTicket: number;
-  titulo: string;
-  descripcion: string;
-  estado: string;
-  severidad: string;
-  fechaDeCreacion: string;
-  fechaLimite: string;
-  idTareas: number[];
-  codigoVersion: number;
-  cuitCliente: string;
 }
 
 export interface Producto {

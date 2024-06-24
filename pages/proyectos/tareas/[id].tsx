@@ -70,6 +70,7 @@ export default function Tareas({ id }: { id: any }) {
     obtenerProyecto();
     obtenerTareas();
     obtenerColaboradores();
+    // eslint-disable-line react-hooks/exhaustive-deps
   }, []);
 
   const tareasFiltradas = tareas

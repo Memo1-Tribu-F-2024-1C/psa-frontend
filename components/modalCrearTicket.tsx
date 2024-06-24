@@ -22,7 +22,7 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
     const [colaboradores, setColaboradores] = useState([]);
     const [proytectos, setProyectos] = useState([]);
 
-    useEffect(() => { 
+    useEffect(() => {
         soportesAxios.get('/clientes')
             .then(response => {
                 setRecursos(response.data);
@@ -70,12 +70,12 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
 
     useEffect(() => {
         const formattedDate = new Date().toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'numeric',
-          day: 'numeric'
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
         });
         setFechaCreacion(formattedDate);
-      }, []);
+    }, []);
 
     useEffect(() => {
         const opt = tareas
@@ -130,10 +130,10 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
 
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
                     <div className='block mb-2 text-sm font-medium text-gray-900 dark:text-white' >
-                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white' id='inputGroup-sizing-defualt'>Fecha de fin estimada:</label>
-                    <input
-                        onChange={(event) => { setDeadline(event.target.value) }}
-                        type='date' className='datepicker bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' />
+                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white' id='inputGroup-sizing-defualt'>Fecha de fin estimada:</label>
+                        <input
+                            onChange={(event) => { setDeadline(event.target.value) }}
+                            type='date' className='datepicker bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' />
                     </div>
                     <div className='block mb-2 text-sm font-medium text-gray-900 dark:text-white' >
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white' id='inputGroup-sizing-defualt'>Tareas:</label>
@@ -169,14 +169,14 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
                         <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
                             onChange={(event) => { setEstado(event.target.value) }}>
 
-                        <option value="Nuevo">Nuevo</option>
-                        <option value="Progreso">Progreso</option>
-                        <option value="Esperando desarrollo">Esperando desarrollo</option>
-                        <option value="Esperando Cliente">Esperando cliente</option>
-                        <option value="Resuelto esperando confirmacion">Resuelto esperando confirmacion</option>
-                        <option value="Cerrado">Cerrado</option>
-                        <option value="Cerrado">Bloqueado</option>
-                                
+                            <option value="Nuevo">Nuevo</option>
+                            <option value="Progreso">Progreso</option>
+                            <option value="Esperando desarrollo">Esperando desarrollo</option>
+                            <option value="Esperando Cliente">Esperando cliente</option>
+                            <option value="Resuelto esperando confirmacion">Resuelto esperando confirmacion</option>
+                            <option value="Cerrado">Cerrado</option>
+                            <option value="Cerrado">Bloqueado</option>
+
                         </select>
                     </div>
 

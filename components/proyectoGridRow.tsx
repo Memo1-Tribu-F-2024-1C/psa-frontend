@@ -103,7 +103,7 @@ export default function ProyectoGridRow({ proyecto, recursos }: { proyecto: Proy
         </button>
 
         {<ModalConfirmar isOpen={modalEliminar.isOpen} onClose={() => setModalEliminar({ isOpen: false, todo: {} })}>
-          <div className='container'>
+          <div className='container text-white'>
             <h1 className='text-3xl font-bold decoration-gray-400'>¡Borrar Proyecto!</h1>
             <h1 className='text-2xl font-bold decoration-gray-400'>Desea borrar el proyecto: <b className="text-blue-600">{proyecto['nombre']}</b>?</h1>
             <h1 className='text-2xl font-bold decoration-gray-400'>ID: <b className="text-blue-600">{proyecto['id'] + 3672}</b></h1><br />

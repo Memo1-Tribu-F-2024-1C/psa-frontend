@@ -24,19 +24,19 @@ const ModalCrearTarea = ({ colaboradores, isOpen, onClose, guardarDatos, idProye
             <span className="sr-only">Icon description</span>
           </button>
         </div>
-        <h1 className='text-3xl font-bold decoration-gray-400'>Crear Tarea</h1>
+        <h1 className='text-3xl font-bold decoration-gray-400 text-white'>Crear Tarea</h1>
         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
 
 
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre:</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Nombre:</label>
           <input
             onChange={(event) => { setNombre(event.target.value); }}
             type="text" id="first_name" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese Nombre de la tarea" required />
         </div><br />
 
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción:</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Descripción:</label>
           <textarea
             onChange={(event) => { setDescripcion(event.target.value); }}
             id="message" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese una descripción de la tarea..."></textarea>
@@ -44,7 +44,7 @@ const ModalCrearTarea = ({ colaboradores, isOpen, onClose, guardarDatos, idProye
 
         <div className="grid gap-6 mb-6 md:grid-cols-2">
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Colaborador en tarea:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Colaborador en tarea:</label>
             <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
               onChange={(event) => { setTecnico(event.target.value) }}>
               <option value="null">No asignado</option>
@@ -57,7 +57,7 @@ const ModalCrearTarea = ({ colaboradores, isOpen, onClose, guardarDatos, idProye
           </div>
 
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Estado:</label>
             <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
               onChange={(event) => { setEstado(event.target.value) }}>
 
@@ -69,7 +69,7 @@ const ModalCrearTarea = ({ colaboradores, isOpen, onClose, guardarDatos, idProye
           </div>
 
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prioridad:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Prioridad:</label>
             <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
               onChange={(event) => { setPrioridad(event.target.value) }}>
 

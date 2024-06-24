@@ -57,6 +57,7 @@ export default function Proyectos() {
   useEffect(() => {
     obtenerProyectos();
     obtenerRecursos();
+    // eslint-disable-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -25,10 +25,10 @@ export default function Soporte() {
 
   useEffect(() => {
     soportesAxios.get('/productos')
-       .then(response => {
-         setProductos(response.data);
-       })
-       .catch(error => {
+      .then(response => {
+        setProductos(response.data);
+      })
+      .catch(error => {
         console.error(error);
        });
   }, []);
@@ -43,7 +43,7 @@ export default function Soporte() {
   
   useEffect(() => {
     productoSeleccionado && setVersiones([productoSeleccionado.versiones || []])
-  },[productoSeleccionado])
+  }, [productoSeleccionado])
 
   
 
@@ -97,10 +97,7 @@ export default function Soporte() {
               </div>
             </div>
           </>
-
-
         }
-
 
       </div>
     </>
