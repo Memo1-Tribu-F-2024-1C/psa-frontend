@@ -12,8 +12,8 @@ export interface Colaborador {
 
 export interface Cliente {
   id: string
-  razon_social: string
-  cuit: string
+  'razon social': string
+  CUIT: string
 }
 
 export interface Proyecto {
@@ -36,6 +36,20 @@ export interface Tarea {
   proyecto: any;
 }
 
+export interface Ticket {
+  numeroTicket: number;
+  titulo: string;
+  descripcion: string
+  severidad: string;
+  estado: string;
+  fechaLimite: string;
+  fechaDeCreacion: string;
+  cuitCliente: string;
+  codigoVersion: number,
+  codigoProducto: number,
+  idTareas: Array<number>;
+}
+
 export enum EstadoTarea {
   NUEVO = 'Nuevo',
   EN_PROGRESO = 'En progreso',
@@ -54,19 +68,6 @@ export enum PrioridadTarea {
   ALTA = 'Alta',
   MEDIA = 'Media',
   BAJA = 'Baja',
-}
-
-export interface Ticket {
-  numeroTicket: number;
-  titulo: string;
-  descripcion: string;
-  estado: string;
-  severidad: string;
-  fechaDeCreacion: string;
-  fechaLimite: string;
-  idTareas: any;
-  codigoVersion: number;
-  cuitCliente: any;
 }
 
 export interface Producto {

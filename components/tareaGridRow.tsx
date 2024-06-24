@@ -7,7 +7,7 @@ import FormatDate from "./formatDate";
 import { proyectosAxios } from "@/api/axios";
 import { Colaborador } from "@/types/types";
 
-export default function TareaGridRow({ tarea, idProyecto, colaboradores }: { tarea: any; idProyecto: any, colaboradores: Array<Colaborador> }) {
+export default function TareaGridRow({ tarea, idProyecto, colaboradores, mostrarAcciones }: { tarea: any; idProyecto?: any, colaboradores?: Array<Colaborador>, mostrarAcciones?: boolean }) {
 
   const [editarTareaModal, setEditarTareaModal] = useState(false);
   const [datos, setDatos] = useState({});

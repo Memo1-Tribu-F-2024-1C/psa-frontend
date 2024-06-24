@@ -15,10 +15,10 @@ function HeaderItem({ title, isBold, isJustify, }: { title: string; isBold?: boo
   );
 }
 
-export default function Ticket({ id }: { id: any }) {
-  const [tickets, setTickets] = useState([]);
-  const [tarea, setTarea] = useState([]);
-  const [proyecto, setProyecto] = useState([]);
+export default function TicketView({ id }: { id: any }) {
+    const [tickets, setTickets] = useState([]);
+    const [tarea, setTarea] = useState([]);
+    const [proyecto, setProyecto] = useState([]);
 
   const obtenerTarea = () => {
     proyectosAxios
@@ -31,16 +31,16 @@ export default function Ticket({ id }: { id: any }) {
       });
   };
 
-  const obtenerTicktets = () => {
-    soportesAxios
-      .get(`/soporte/tickets/`)
-      .then((response) => {
-        setTickets(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+    const obtenerTicktets = () => {
+        soportesAxios
+            .get(`/tickets`)
+            .then((response) => {
+                setTickets(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
   const obtenerProyecto = () => {
     proyectosAxios

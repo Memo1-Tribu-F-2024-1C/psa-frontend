@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { soportesAxios } from "@/api/axios";
-import TicketGridRow from "@/components/ticketGridRow";
+import TicketGridRowSoporte from "@/components/ticketGridRowSoporte";
 import { useSearchParams } from 'next/navigation'
-import { Ticket } from "@/types/types";
+import { Ticket, VersionProducto, Producto } from "@/types/types";
+import styles from '@/components/tickets.module.css';
+
+import Link from 'next/link'
 
 function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: boolean, isJustify?: boolean }) {
   return (
@@ -16,7 +19,8 @@ function HeaderItem({ title, isBold, isJustify }: { title: string, isBold?: bool
 export default function Tickets() {
   const searchParams = useSearchParams()
   
-  const version = searchParams.get('version')
+  const codigoVersion: any = searchParams.get('version')
+  const codigoProducto = searchParams.get('producto')
 
   const [tickets, setTickets] = useState<Ticket[]>([]);
 
@@ -27,16 +31,42 @@ export default function Tickets() {
   const [versionSeleccionada, setVersionSeleccionada] = useState('Todas');
   const [severidadSeleccionada, setSeveridadSeleccionada] = useState('Todas');
   const [clienteSeleccionado, setClienteSeleccionado] = useState('Todas');
+  const [version, setVersion] = useState({} as VersionProducto);
+  const [producto, setProducto] = useState({} as Producto);
 
   useEffect(() => {
-    soportesAxios.get(`versiones/${version}/tickets`)
-      .then(response => {
-        console.log(response.data);
+    const fetchData = async () => {
+      try {
+        const response = await soportesAxios.get(`versiones/${codigoVersion}/tickets`);
         setTickets(response.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+
+    if (codigoVersion && codigoProducto) {
+      fetchData();
+    }
+  }, [codigoVersion, codigoProducto]);
+
+  useEffect(() => { 
+    soportesAxios.get(`/versiones/${codigoVersion}`)
+        .then(response => {
+            setVersion(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        }); ``
+  }, []);
+
+  useEffect(() => { 
+    soportesAxios.get(`/productos/${codigoProducto}`)
+        .then(response => {
+            setProducto(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        }); ``
   }, []);
 
   const ticketsFiltrados = tickets;
@@ -46,7 +76,19 @@ export default function Tickets() {
     <>
       <div className="container max-w-7xl mx-auto mt-8">
         <div className="mb-4">
-          <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Listado de Tickets</h1>
+          <button
+            onClick={() => router.push(
+              { 
+                pathname: `./`, 
+                query: { producto: codigoProducto } 
+              })}
+            className="inline-flex items-center mr-2 mt-1 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white text-sm font-medium rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            
+          </button>
+          <h1 className="text-3xl font-bold text-gray-200 decoration-gray-400">Listado de Tickets  - {producto.nombre} - {version.nombre}</h1>
           <br />
           <hr />
         </div>
@@ -54,22 +96,22 @@ export default function Tickets() {
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div className="inline-block min-w-full overflow-hidden align-middle border-b border-r border-l border-t border-solid border-gray-200 shadow sm:rounded-lg">
-              <table className="min-w-full">
+              <table>
                 <thead>
-                  <tr className="text-center">
-                    <HeaderItem title="Nro de Ticket" />
-                    <HeaderItem title="Titulo" />
-                    <HeaderItem title="Estado" />
-                    <HeaderItem title="Severidad" />
-                    <HeaderItem title="Fecha de Creación" />
-                    <HeaderItem title="Tiempo Límite" />
-                    <HeaderItem title="Cliente" /> 
-                    <HeaderItem title="Acciones" isJustify={true} />
+                  <tr className={`text-center ${styles.tableHeader}`}>
+                    <th className={`text-center${styles.colTicket}`} >Nro de Ticket</th>
+                    <th className={styles.colTitle}>Titulo</th>
+                    <th className={`w-100${styles.colStatus}`}>Estado</th>
+                    <th className={styles.colSeverity}>Severidad</th>
+                    <th className={styles.colCreation}>Fecha de Creación</th>
+                    <th className={styles.colDeadline}>Tiempo Límite</th>
+                    <th className={styles.colClient}>Cliente</th>
+                    <th className={styles.colActions}>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {ticketsFiltrados.map((ticket) => (
-                    <TicketGridRow key={ticket.numeroTicket} ticket={ticket} />
+                    <TicketGridRowSoporte key={ticket.numeroTicket} ticket={ticket}/>
                   ))}
                 </tbody>
               </table>
