@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './modalCrearProyecto.module.css';
 import { Colaborador } from "@/types/types";
 
-const ModalEditarTarea = ({ colaboradores, isOpen, onClose, editarDatos, tarea, idProyecto, children }: { colaboradores: Array<Colaborador>, isOpen: boolean; onClose: () => void; editarDatos: (datos: any, tarea: any) => void; tarea: any; idProyecto: any; children: any }) => {
+const ModalEditarTarea = ({ colaboradores, isOpen, onClose, editarDatos, tarea, idProyecto, children }: { colaboradores: Colaborador[], isOpen: boolean; onClose: () => void; editarDatos: (datos: any, tarea: any) => void; tarea: any; idProyecto: any; children: any }) => {
 
   const diccionarioEstado: any = {
     "Nuevo": "NUEVO",
