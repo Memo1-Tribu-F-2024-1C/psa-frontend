@@ -2,6 +2,7 @@ import { useEffect,useState } from "react";
 import { Ticket } from "@/types/types";
 import {Cliente} from "@/types/types";
 import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation'
 import { soportesAxios } from "@/api/axios";
 import FormatDate from "@/components/formatDate";
 import ModalEditarTicket from "./modalEditarTicket";
@@ -10,6 +11,9 @@ import ModalConfirmar from "./modalConfirmar";
 export default function TicketGridRowSoporte({ ticket }: { ticket: Ticket}) {
 
   const router = useRouter();
+  const searchParams = useSearchParams()
+  const codigoVersion: any = searchParams.get('version')
+  const codigoProducto = searchParams.get('producto')
 
   const [modalEliminar, setModalEliminar] = useState({
     isOpen: false,
@@ -27,7 +31,7 @@ export default function TicketGridRowSoporte({ ticket }: { ticket: Ticket}) {
       .then(response => {
         console.log('Response:', response); 
         setModalEliminar({ isOpen: false, todo: {} });
-        window.location.reload();
+        window.location.reload() 
       })
       .catch(error => {
         console.error('Error:', error); 
@@ -38,6 +42,10 @@ export default function TicketGridRowSoporte({ ticket }: { ticket: Ticket}) {
     soportesAxios.put(`/tickets/${ticket.numeroTicket}`, datos)
       .then(response => {
         setDatos(response.data);
+        router.push({
+          pathname: `./tickets`,
+          query: {version: codigoVersion, producto: codigoProducto}
+        })
         window.location.reload();
       })
       .catch(error => {

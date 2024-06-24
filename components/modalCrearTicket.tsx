@@ -8,7 +8,7 @@ import ModalCrearTareaDesdeTicket from "@/components/modalCrearTareaDesdeTicket"
 const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codigoVersion, children }: { isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; codigoProducto: number; codigoVersion: number; children: any }) => {
 
     const [recursos, setRecursos] = useState([]);
-
+    const [options, setOptions] = useState([] as { value: number, label: string }[]);
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [estado, setEstado] = useState("Nuevo");
@@ -31,15 +31,19 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
                 console.error(error);
             }); ``
     }, []);
-
-    useEffect(() => {
+    
+    const obtenerTareas = () => {
         proyectosAxios.get('/tareas')
             .then(response => {
                 setTareas(response.data);
             })
             .catch(error => {
                 console.error(error);
-            }); ``
+            }); 
+    }
+
+    useEffect(() => {
+``
     }, []);
 
     useEffect(() => {
@@ -73,13 +77,18 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
         setFechaCreacion(formattedDate);
       }, []);
 
-    const options = tareas
-    .filter(tarea => tarea.estado != "Cerrado")
-    .map(t => {
-        return {
-            value: t['id'], label: t['nombre']
-        }
-    }) 
+    useEffect(() => {
+        const opt = tareas
+        .filter(tarea => tarea.estado != "Cerrado")
+        .map(t => {
+            return {
+                value: t['id'], label: t['nombre']
+            }
+        }) 
+
+        setOptions(opt)
+    }, [tareas])
+     
 
     const handlerTareasSeleccionadas = (options: any) => {
         const values = options.map((o: any) => o.value) 
@@ -193,7 +202,10 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
                          </svg>
                          Crear Tarea
                        </button>
-                       <ModalCrearTareaDesdeTicket colaboradores={colaboradores} isOpen={crearTareaModal} onClose={() => setCrearTareaModal(false)}>
+                       <ModalCrearTareaDesdeTicket colaboradores={colaboradores} isOpen={crearTareaModal} onClose={() => {
+                        setCrearTareaModal(false)
+                        obtenerTareas()
+                        }}>
                          <button onClick={() => setCrearTareaModal(false)}>asdfs</button>
                        </ModalCrearTareaDesdeTicket>
                      </div>

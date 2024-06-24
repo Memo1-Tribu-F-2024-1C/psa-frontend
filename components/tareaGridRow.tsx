@@ -16,7 +16,7 @@ export default function TareaGridRow({ tarea, idProyecto, colaboradores, mostrar
         proyectosAxios.put('/tarea', datos)
             .then(response => {
                 setDatos(response.data);
-                window.location.reload();
+                // window.location.reload();
             })
             .catch(error => {
                 console.error(error);
