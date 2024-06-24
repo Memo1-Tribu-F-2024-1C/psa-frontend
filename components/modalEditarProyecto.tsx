@@ -34,11 +34,11 @@ const ModalEditarProyecto = ({ recursos, isOpen, onClose, editarDatos, proyecto,
             <span className="sr-only">Icon description</span>
           </button>
         </div>
-        <h1 className='text-3xl font-bold decoration-gray-400'>Editar Proyecto</h1>
+        <h1 className='text-3xl font-bold decoration-gray-400 text-white'>Editar Proyecto</h1>
         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
 
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID:</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 text-white">ID:</label>
           <input
             disabled={true}
             value={id + 3672}
@@ -46,7 +46,7 @@ const ModalEditarProyecto = ({ recursos, isOpen, onClose, editarDatos, proyecto,
         </div><br />
 
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre:</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Nombre:</label>
           <input
             onChange={(event) => { setNombre(event.target.value); }}
             value={nombre}
@@ -54,7 +54,7 @@ const ModalEditarProyecto = ({ recursos, isOpen, onClose, editarDatos, proyecto,
         </div><br />
 
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción:</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Descripción:</label>
           <textarea
             onChange={(event) => { setDescripcion(event.target.value); }}
             value={descripcion}
@@ -63,7 +63,7 @@ const ModalEditarProyecto = ({ recursos, isOpen, onClose, editarDatos, proyecto,
 
         <div className="grid gap-6 mb-6 md:grid-cols-2">
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lider del Proyecto:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Lider del Proyecto:</label>
             <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
               onChange={(event) => { setLider(event.target.value) }} value={lider}>
               <option value={proyecto['lider'] == null ? null : proyecto['lider']['id']}>...</option>
@@ -76,7 +76,7 @@ const ModalEditarProyecto = ({ recursos, isOpen, onClose, editarDatos, proyecto,
           </div>
 
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 text-white">Estado:</label>
             <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
               onChange={(event) => { setEstado(event.target.value) }} value={estado}>
               <option value="EMPEZADO">EMPEZADO</option>
@@ -88,7 +88,7 @@ const ModalEditarProyecto = ({ recursos, isOpen, onClose, editarDatos, proyecto,
         </div><br />
 
         <div className="grid gap-6 mb-6 md:grid-cols-2">
-          <div className='block mb-2 text-sm font-medium text-gray-900 dark:text-white' >
+          <div className='block mb-2 text-sm font-medium text-gray-900 text-white' >
             <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white' id='inputGroup-sizing-defualt'>Fecha de finalización estimada:</label>
             <input
               onChange={(event) => { setFechaFin(event.target.value) }}
