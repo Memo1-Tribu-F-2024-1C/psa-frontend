@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+/*import { useEffect, useState } from 'react';
 import styles from './modalCrearProyecto.module.css';
 import { soportesAxios } from "@/api/axios";
 
@@ -25,7 +25,7 @@ const ModalMostrarTicket = ({ isOpen, onClose, guardarDatos, productoId, version
                 console.error(error);
             }); ``
     }, []);*/
-
+/*
     return (
 
         <div className={styles.modalContainer} style={{ display: isOpen ? 'grid' : 'none' }}>
@@ -43,7 +43,6 @@ const ModalMostrarTicket = ({ isOpen, onClose, guardarDatos, productoId, version
                 </div>
                 <h1 className='text-3xl font-bold decoration-gray-400'>Crear Ticket</h1>
                 <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-
 
                 <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción:</label>
@@ -120,4 +119,4 @@ const ModalMostrarTicket = ({ isOpen, onClose, guardarDatos, productoId, version
     );
 }
 
-export default ModalCrearTicket;
+export default ModalCrearTicket;*/

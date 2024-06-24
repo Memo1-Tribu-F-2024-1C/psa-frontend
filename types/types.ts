@@ -12,8 +12,8 @@ export interface Colaborador {
 
 export interface Cliente {
   id: string
-  razon_social: string
-  cuit: string
+  'razon social': string
+  CUIT: string
 }
 
 export interface Proyecto {
@@ -38,13 +38,13 @@ export interface Tarea {
 
 export interface Ticket {
   numeroTicket: number;
-  tiulo: string;
+  titulo: string;
   descripcion: string
   severidad: string;
   estado: string;
   fechaLimite: string;
   fechaCreacion: string;
-  cuitCliente: number;
+  cuitCliente: string;
   codigoVersion: number,
   codigoProducto: number,
   idTareas: Array<number>;
@@ -78,9 +78,9 @@ export interface Ticket {
   severidad: string;
   fechaDeCreacion: string;
   fechaLimite: string;
-  idTareas: any;
+  idTareas: number[];
   codigoVersion: number;
-  cuitCliente: any;
+  cuitCliente: string;
 }
 
 export interface Producto {

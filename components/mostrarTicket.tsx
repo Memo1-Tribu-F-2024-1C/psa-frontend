@@ -1,61 +1,102 @@
 import { Bigelow_Rules } from "next/font/google";
-import type
+import styles from "./mostrarTarea.module.css";
+import { Ticket, Cliente, VersionProducto, Producto } from "@/types/types";
+import { useEffect, useState } from "react";
+import { soportesAxios } from "@/api/axios";
 
-export default function MostrarTicket({ proyecto, Tareas }: { ticket: Ticket }) {
 
-    const cantidadTareas = Tareas.length;
-    const nuevas = Tareas.filter((objeto: any) => objeto['estado'] === 'Nuevo').length;
-    const enProgreso = Tareas.filter((objeto: any) => objeto['estado'] === 'En progreso').length;
-    const bloqueado = Tareas.filter((objeto: any) => objeto['estado'] === 'Bloqueado').length;
-    const cerradas = Tareas.filter((objeto: any) => objeto['estado'] === 'Cerrado').length;
+export default function MostrarTicket( { ticket} : { ticket: Ticket}) {
+
+    const [clientes, setClientes] = useState([] as Cliente[]);
+    const [version, setVersion] = useState<VersionProducto | null>(null);
+    const [producto, setProducto] = useState<Producto | null>(null);
+
+    useEffect(() => {
+        const obtenerClientes = async () => {
+            try {
+                const response = await soportesAxios.get('/clientes');
+                setClientes(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const obtenerVersion = async () => {
+            try {
+                const response = await soportesAxios.get(`/versiones/${ticket.codigoVersion}`);
+                setVersion(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        obtenerClientes();
+        if (ticket.codigoVersion) {
+            obtenerVersion();
+        }
+    }, [ticket]);
+
+    useEffect(() => {
+        const obtenerProducto = async () => {
+            try {
+                const response = await soportesAxios.get(`/productos/${version?.idProducto}`);
+                setProducto(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        if (version && version.idProducto) {
+            obtenerProducto();
+        }
+    }, [version]);
+
+    const cliente = clientes.find(c => c.CUIT === ticket.cuitCliente);
 
     return (
-        <div className={styles.cajaProyecto}>
+        <div className={styles.cajaTarea}>
             <div className={styles.caja1} >
-                <div className="task-row my-1">
-                    <b>ID: </b> <b className=" text-gray-300"> {proyecto['id']+3672} </b> <br />
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Numero: </div>
+                    <div className="flex-grow"> {ticket['numeroTicket']} </div>
                 </div>
-                <div className="task-row my-1">
-                    <b>Nombre: </b><b className=" text-gray-300"> {proyecto['nombre']} </b><br />
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Titulo: </div>
+                    <div className="flex-grow"> {ticket['titulo']} </div>
                 </div>
-                <div className="task-row my-1">
-                    <b>Descripción: </b><b className=" text-gray-300"> {proyecto['descripcion']} </b><br />
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Descripción: </div>
+                    <div className="flex-grow"> {ticket['descripcion']} </div>
                 </div>
-                <div className="task-row my-1">
-                    <b>Lider: </b>
-                    {proyecto['lider'] ? (
-                        <b className=" text-gray-300">{proyecto['lider'].nombre} {proyecto['lider'].apellido}</b>
-                    ) :
-
-                        (
-                            <span className="text-gray-300">No asignado</span>
-                        )}
-                    <br />
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Cliente: </div>
+                    <div className="flex-grow">{cliente ? 
+                      ( <b className=" text-gray-300">{cliente['razon social']}</b>) :
+                      ( <span className="text-gray-300">No asignado</span>)} </div>
                 </div>
-                <div className="task-row my-1">
-                    <b>Estado proyecto: </b><b className=" text-gray-300"> {proyecto['estado']} </b><br />
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Estado Ticket: </div>
+                    <div className="flex-grow"> {ticket['estado']} </div>
                 </div>
             </div>
 
             <div className={styles.caja2}>
-                <div className="task-container">
-                    <div className="task-row my-1">
-                        <b>Tareas nuevas:</b><span className= "whitespace-pre">                {nuevas}</span>
-                    </div>
-                    <div className="task-row my-1">
-                        <b>Tareas en progreso:</b><span className= "whitespace-pre">       {enProgreso}</span>
-                    </div>
-                    <div className="task-row my-1">
-                        <b>Tareas bloqueadas:</b><span className= "whitespace-pre">        {bloqueado}</span>
-                    </div>
-                    <div className="task-row my-1">
-                        <b>Tareas cerradas:</b><span className= "whitespace-pre">             {cerradas}</span>
-                    </div>
-                    <div className="task-row my-1">
-                        <b>Total de tareas:</b><span className= "whitespace-pre">              {cantidadTareas}</span>
-                    </div>
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Producto Asociado:</div>
+                    <span className= "whitespace-pre">{producto?.nombre}</span>
                 </div>
-
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Version:</div>
+                    <div className="flex-grow">{version?.nombre}</div>
+                </div>
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Lanzamiento:</div>
+                    <div className="flex-grow">{version?.fechaCreacion}</div>
+                </div>
+                <div className="task-row my-1 flex">
+                    <div className="w-40 font-semibold">Cantidad de Tareas:</div>
+                    <div className="flex-grow">{ticket.idTareas?.length}</div>
+                </div>
             </div>
         </div>
     )

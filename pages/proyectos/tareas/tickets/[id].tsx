@@ -23,7 +23,7 @@ function HeaderItem({
     );
 }
 
-export default function Ticket({ id }: { id: any }) {
+export default function TicketView({ id }: { id: any }) {
     const [tickets, setTickets] = useState([]);
     const [tarea, setTarea] = useState([]);
     const [proyecto, setProyecto] = useState([]);
@@ -41,7 +41,7 @@ export default function Ticket({ id }: { id: any }) {
 
     const obtenerTicktets = () => {
         soportesAxios
-            .get(`/soporte/tickets/`)
+            .get(`/tickets`)
             .then((response) => {
                 setTickets(response.data);
             })

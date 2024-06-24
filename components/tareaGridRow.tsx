@@ -7,7 +7,7 @@ import FormatDate from "./formatDate";
 import { proyectosAxios } from "@/api/axios";
 import { Colaborador } from "@/types/types";
 
-export default function TareaGridRow({ tarea, idProyecto, colaboradores }: { tarea: any; idProyecto: any, colaboradores: Array<Colaborador> }) {
+export default function TareaGridRow({ tarea, idProyecto, colaboradores, mostrarAcciones }: { tarea: any; idProyecto?: any, colaboradores?: Array<Colaborador>, mostrarAcciones?: boolean }) {
 
     const [editarTareaModal, setEditarTareaModal] = useState(false);
     const [datos, setDatos] = useState({});
@@ -77,7 +77,7 @@ export default function TareaGridRow({ tarea, idProyecto, colaboradores }: { tar
             </td>
 
             {/* Botones Acciones */}
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            {mostrarAcciones && <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
 
                 <button
                     onClick={() => setEditarTareaModal(true)}
@@ -87,7 +87,7 @@ export default function TareaGridRow({ tarea, idProyecto, colaboradores }: { tar
                     </svg>
                     Editar
                 </button>
-                <ModalEditarTarea colaboradores={colaboradores} isOpen={editarTareaModal} onClose={() => setEditarTareaModal(false)} editarDatos={editarDatos} tarea={tarea} idProyecto={idProyecto}>
+                <ModalEditarTarea colaboradores={colaboradores as any} isOpen={editarTareaModal} onClose={() => setEditarTareaModal(false)} editarDatos={editarDatos} tarea={tarea} idProyecto={idProyecto}>
                     <button onClick={() => setEditarTareaModal(false)}>Guardar</button>
                 </ModalEditarTarea>
 
@@ -134,8 +134,12 @@ export default function TareaGridRow({ tarea, idProyecto, colaboradores }: { tar
                         </div>
                     </div>
                 </ModalConfirmar>
-            </td>
+            </td>}
 
         </tr>
     )
 }
+
+TareaGridRow.defaultProps = {
+	mostrarAcciones: true
+};
