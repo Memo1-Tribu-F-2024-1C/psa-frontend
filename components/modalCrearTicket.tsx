@@ -3,6 +3,7 @@ import styles from './modalCrearProyecto.module.css';
 import { soportesAxios, proyectosAxios } from "@/api/axios";
 import Select, {StylesConfig} from "react-select";
 import { Tarea } from "@/types/types"
+import ModalCrearTarea from "@/components/modalCrearTarea";
 
 const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codigoVersion, children }: { isOpen: boolean; onClose: () => void; guardarDatos: (datos: any) => void; codigoProducto: number; codigoVersion: number; children: any }) => {
 
@@ -17,6 +18,8 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
     const [tareas, setTareas] = useState([] as Tarea[]);
     const [tareasSeleccionadas, setTareasSeleccionadas] = useState([]);
     const [fechaCreacion, setFechaCreacion] = useState('');
+    const [crearTareaModal, setCrearTareaModal] = useState(false);
+    const [colaboradores, setColaboradores] = useState([])
 
     useEffect(() => { 
         soportesAxios.get('/clientes')
@@ -118,7 +121,7 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
 
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-200 dark:text-white">Cliente del ticket:</label>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cliente del ticket:</label>
                         <select className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="inputGroupSelect01"
                             onChange={(event) => { setCliente(event.target.value) }}>
                             <option value="null">No asignado</option>
@@ -157,6 +160,20 @@ const ModalCrearTicket = ({ isOpen, onClose, guardarDatos, codigoProducto, codig
 
                         </select>
                     </div>
+                    <div className="mb-4">
+                       <button
+                         onClick={() => setCrearTareaModal(true)}
+                         className="inline-flex items-center px-4 py-3 bg-blue-500 hover:bg-blue-700 text-white text-sm font-medium rounded-md"
+                       >
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                         </svg>
+                         Crear Tarea
+                       </button>
+                       <ModalCrearTarea colaboradores={colaboradores} isOpen={crearTareaModal} onClose={() => setCrearTareaModal(false)} guardarDatos={guardarDatos} idProyecto={null}>
+                         <button onClick={() => setCrearTareaModal(false)}>Guardar</button>
+                       </ModalCrearTarea>
+                     </div>
                 </div><br />
             </div><br />
             <div className='flex flex-row-reverse gap-10'>
